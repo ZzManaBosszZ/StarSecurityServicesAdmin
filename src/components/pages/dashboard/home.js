@@ -1,5 +1,4 @@
 import Layout from "../../layouts/index";
-import { Link } from "react-router-dom";
 function Dashboard () {
     return(
         <Layout>

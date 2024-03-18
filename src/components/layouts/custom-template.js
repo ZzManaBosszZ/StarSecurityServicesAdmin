@@ -1,4 +1,5 @@
 function Custom() {
+	
     return(
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvas_setting" aria-labelledby="offcanvas_setting">
 		<div class="offcanvas-header">
@@ -9,13 +10,13 @@ function Custom() {
 			<div class="mb-4">
 				<h6>Set Theme Color</h6>
 				<ul class="choose-skin list-unstyled mb-0">
-					<li data-theme="ValenciaRed"><div style="--mytask-theme-color: #D63B38;"></div></li>
-					<li data-theme="SunOrange"><div style="--mytask-theme-color: #F7A614;"></div></li>
-					<li data-theme="AppleGreen"><div style="--mytask-theme-color: #5BC43A;"></div></li>
-					<li data-theme="CeruleanBlue"><div style="--mytask-theme-color: #00B8D6;"></div></li>
-					<li data-theme="Mariner"><div style="--mytask-theme-color: #0066FE;"></div></li>
-					<li data-theme="PurpleHeart" class="active"><div style="--mytask-theme-color: #6238B3;"></div></li>
-					<li data-theme="FrenchRose"><div style="--mytask-theme-color: #EB5393;"></div></li>
+					<li data-theme="ValenciaRed"><div style={{mytaskthemecolor: '#D63B38'}}></div></li>
+					<li data-theme="SunOrange"><div style={{mytaskthemecolor: '#F7A614'}}></div></li>
+					<li data-theme="AppleGreen"><div style={{mytaskthemecolor: '#5BC43A'}}></div></li>
+					<li data-theme="CeruleanBlue"><div style={{mytaskthemecolor: '#00B8D6'}}></div></li>
+					<li data-theme="Mariner"><div style={{mytaskthemecolor: '#0066FE'}}></div></li>
+					<li data-theme="PurpleHeart" class="active"><div style={{mytaskthemecolor: '#6238B3'}}></div></li>
+					<li data-theme="FrenchRose"><div style={{mytaskthemecolor: '#EB5393'}}></div></li>
 				</ul>
 			</div>
             <div class="mb-4 flex-grow-1">
@@ -41,10 +42,7 @@ function Custom() {
                     </li>
                 </ul>
 			</div>
-			<div class="d-flex">
-				<a href="https://themeforest.net/item/mytask-hr-project-management-admin-template/31974551" class="btn w-100 me-1 py-2 btn-primary">Buy Now</a>
-				<a href="https://themeforest.net/user/pixelwibes/portfolio" class="btn w-100 ms-1 py-2 btn-dark">View Portfolio</a>
-			</div>
+			
 		</div>
 	</div>
     );
