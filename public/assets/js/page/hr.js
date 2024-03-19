@@ -1,14 +1,18 @@
 if (typeof jQuery === "undefined") {
     throw new Error("jQuery plugins need to be before this file");
 }
+
+// eslint-disable-next-line no-undef
 $(function() {
     "use strict";
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        // eslint-disable-next-line no-undef
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 
     // Employees Data
+    // eslint-disable-next-line no-undef
     $(document).ready(function() {
         var options = {
             align: 'center',
@@ -40,11 +44,13 @@ $(function() {
                 }
             }]
         }
+        // eslint-disable-next-line no-undef
         var chart = new ApexCharts( document.querySelector("#apex-MainCategories"),options);        
         chart.render();
     }); 
 
     // Employees Analytics
+    // eslint-disable-next-line no-undef
     $(document).ready(function() { 
         var options = {
             series: [{
@@ -113,12 +119,13 @@ $(function() {
                 max: 50,
             }
         };
-
+// eslint-disable-next-line no-undef
         var chart = new ApexCharts(document.querySelector("#apex-emplyoeeAnalytics"), options);
         chart.render();
     });  
 
      // Hr Resorce
+     // eslint-disable-next-line no-undef
     $(document).ready(function() {
         
         var options = {
@@ -171,7 +178,7 @@ $(function() {
                 opacity: 1
             }
         };
-
+// eslint-disable-next-line no-undef
         var chart = new ApexCharts(document.querySelector("#hiringsources"), options);
         chart.render();
     });
