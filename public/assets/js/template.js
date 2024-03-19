@@ -89,13 +89,13 @@ $(function () {
 
     // Monochrome Mode
     // eslint-disable-next-line no-undef
-    $('.monochrome-toggle input:checkbox').on('click', function () {// eslint-disable-next-line no-undef
-        if ($(this).is(":checked")) {// eslint-disable-next-line no-undef
-            $('body').addClass("monochrome");
-        } else {// eslint-disable-next-line no-undef
-            $('body').removeClass("monochrome");
-        }
-    });
+    // $('.monochrome-toggle input:checkbox').on('click', function () {// eslint-disable-next-line no-undef
+    //     if ($(this).is(":checked")) {// eslint-disable-next-line no-undef
+    //         $('body').addClass("monochrome");
+    //     } else {// eslint-disable-next-line no-undef
+    //         $('body').removeClass("monochrome");
+    //     }
+    // });
 
     // light and dark theme setting js
     var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
