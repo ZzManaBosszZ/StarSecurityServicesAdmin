@@ -1,8 +1,8 @@
 const url = {
     BASE_URL: "https://localhost:7011/api",
-    MENU: {
-        LIST: "/menu",
-    },
+    // MENU: {
+    //     LIST: "/menu",
+    // },
     DASHBOARD: {
         
     },

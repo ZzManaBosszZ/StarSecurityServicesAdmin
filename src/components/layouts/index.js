@@ -6,7 +6,7 @@ function Layout({ children }) {
     return (
         <div id="mytask-layout">
             <Sidebar />
-            <div class="main px-lg-4 px-md-4">
+            <div className="main px-lg-4 px-md-4">
             <Navheader/>
             <div className="content-body">
                 <div className="container-fluid">
