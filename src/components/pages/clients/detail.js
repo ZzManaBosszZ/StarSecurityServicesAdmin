@@ -1,7 +1,7 @@
 import Layout from "../../layouts";
 
 
-function ProfileClient() {
+function ClientDetail() {
     return (
 
         <Layout>
@@ -368,4 +368,4 @@ function ProfileClient() {
         </Layout>
     );
 }
-export default ProfileClient;
+export default ClientDetail;

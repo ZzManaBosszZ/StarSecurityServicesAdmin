@@ -1,6 +1,6 @@
 import Layout from "../../layouts";
 
-function EmpProfile() {
+function EmpDetail() {
 
     return (
         <Layout>
@@ -637,4 +637,4 @@ function EmpProfile() {
         </Layout>
     );
 }
-export default EmpProfile;
+export default EmpDetail;

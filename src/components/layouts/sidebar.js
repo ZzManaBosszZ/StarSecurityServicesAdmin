@@ -28,26 +28,15 @@ function Sidebar() {
 
 
                 <ul className="menu-list flex-grow-1 mt-3">
-                    <li className={collapsedMenus.dashboard ? "active" : "collapsed"}>
-                        <a className="m-link active" onClick={() => toggleSubMenu('dashboard')}>
-                            <i className="icofont-home fs-5"></i> <span>Dashboard</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span>
-                        </a>
 
-                        <ul className={collapsedMenus.dashboard ? "sub-menu collapse show" : "sub-menu collapse"} id="dashboard-Components">
-                            <li><a className="ms-link active" href="index.html"> <span>Hr Dashboard</span></a></li>
-                            <li><a className="ms-link" href="project-dashboard.html"> <span>Project Dashboard</span></a></li>
-                        </ul>
-                    </li>
-                    <li className={collapsedMenus.project ? "active" : "collapsed"}>
-                        <a className="m-link active" onClick={() => toggleSubMenu('project')}>
-                            <i className="icofont-briefcase fs-5"></i> <span>Projects</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span>
-                        </a>
-
+                    <li class={collapsedMenus.project ? "active" : "collapsed"}>
+                        <a class="m-link" data-bs-toggle="collapse" data-bs-target="#project-Components" href="#" onClick={() => toggleSubMenu('project')}>
+                            <i class="icofont-briefcase"></i><span>Projects</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                         <ul className={collapsedMenus.project ? "sub-menu collapse show" : "sub-menu collapse"} id="project-Components">
-                            <li><a className="ms-link" href="projects.html"><span>Projects</span></a></li>
-                            <li><a className="ms-link" href="task.html"><span>Tasks</span></a></li>
-                            <li><a className="ms-link" href="timesheet.html"><span>Timesheet</span></a></li>
-                            <li><a className="ms-link" href="team-leader.html"><span>Leaders</span></a></li>
+                            <li><a class="ms-link" href="projects.html"><span>Projects</span></a></li>
+                            <li><a class="ms-link" href="task.html"><span>Tasks</span></a></li>
+                            <li><a class="ms-link" href="timesheet.html"><span>Timesheet</span></a></li>
+                            <li><a class="ms-link" href="team-leader.html"><span>Leaders</span></a></li>
                         </ul>
                     </li>
 
@@ -60,21 +49,19 @@ function Sidebar() {
                             <li><a className="ms-link" href="ticket-detail.html"> <span>Ticket Detail</span></a></li>
                         </ul>
                     </li>
-                    <li className={collapsedMenus.client ? "active" : "collapsed"}>
-                        <a className="m-link active" data-bs-target="#tikit-Components" onClick={() => toggleSubMenu('client')}>
-                            <i className="icofont-users-alt-5"></i> <span>Clients</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span>
-                        </a>
-
+                    <li class={collapsedMenus.client ? "active" : "collapsed"}>
+                        <a class="m-link" data-bs-toggle="collapse" data-bs-target="#client-Components" href="#" onClick={() => toggleSubMenu('client')}><i
+                            class="icofont-user-male"></i> <span>Our Clients</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                         <ul className={collapsedMenus.client ? "sub-menu collapse show" : "sub-menu collapse"} id="client-Components">
-                            <li><Link to="/profileclientlist" className="ms-link" > <span>Clients</span></Link></li>
-                            <li><a className="ms-link" href="profile.html"> <span>Client Profile</span></a></li>
+                            <Link to="/profileclientlist"><li><a class="ms-link" ><span>Clients</span></a></li></Link>
+                            <li><a class="ms-link" href="profile.html"> <span>Client Profile</span></a></li>
                         </ul>
                     </li>
-                    <li className="collapsed">
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#emp-Components" href="#"><i
+                    <li className={collapsedMenus.emp ? "active" : "collapsed"}>
+                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#emp-Components" href="#" onClick={() => toggleSubMenu('emp')}><i
                             className="icofont-users-alt-5"></i> <span>Employees</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
 
-                        <ul className="sub-menu collapse" id="emp-Components">
+                        <ul className={collapsedMenus.emp ? "sub-menu collapse show" : "sub-menu collapse"} id="emp-Components">
                             <li><a className="ms-link" href="members.html"> <span>Members</span></a></li>
                             <li><a className="ms-link" href="employee-profile.html"> <span>Members Profile</span></a></li>
                             <li><a className="ms-link" href="holidays.html"> <span>Holidays</span></a></li>
@@ -86,11 +73,11 @@ function Sidebar() {
                         </ul>
                     </li>
 
-                    <li className="collapsed">
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#"><i
+                    <li className={collapsedMenus.servicesorder ? "active" : "collapsed"}>
+                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#" onClick={() => toggleSubMenu('servicesorder')}><i
                             className="icofont-ui-calculator"></i> <span>Accounts</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
 
-                        <ul className="sub-menu collapse" id="menu-Componentsone">
+                        <ul className={collapsedMenus.servicesorder ? "sub-menu collapse show" : "sub-menu collapse"} id="menu-Componentsone">
                             <li><a className="ms-link" href="invoices.html"><span>Invoices</span> </a></li>
                             <li><a className="ms-link" href="payments.html"><span>Payments</span> </a></li>
                             <li><a className="ms-link" href="expenses.html"><span>Expenses</span> </a></li>

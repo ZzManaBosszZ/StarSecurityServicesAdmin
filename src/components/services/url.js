@@ -13,6 +13,22 @@ const url = {
 
     AUTH: {
         LOGIN: "/Accounts/SignUp",
+    },
+
+    CLIENT:{
+
+    },
+
+    SERVICE: {
+
+    },
+
+    SERVICE_OFFER: {
+
+    },
+
+    DEPARTMENT:{
+        
     }
 }
 export default url;

@@ -1,7 +1,46 @@
 import Layout from "../../layouts";
-
+import React from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ClientList() {
+
+    const [showModal, setShowModal] = useState(false);
+    const [formData, setFormData] = useState({
+        clientName: '',
+        clientName1: '',
+        companyName1: '',
+        companyName2: '',
+        companyName3: '',
+        companyName4: '',
+        companyName5: '',
+        // Add more fields as needed
+    });
+
+      // Define function that will open the modal
+  const handleOpen = () => {
+    setShowModal(true);
+  };
+
+  // Define function that will close the modal
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleCreateClient = () => {
+        // Add your logic here to handle creating the client
+        console.log('Form Data:', formData);
+        // You can send form data to an API, update state, etc.
+        setShowModal(false); // Close the modal after handling form submission
+    };
 
     return(
         <Layout>
@@ -27,7 +66,9 @@ function ClientList() {
                                         <li><a className="dropdown-item" href="#">Design Tech</a></li>
                                         </ul>
                                     </div>
+                                    <Link to="/profileclient-create">
                                     <button type="button" className="btn btn-dark ms-1 " data-bs-toggle="modal" data-bs-target="#createproject"><i className="icofont-plus-circle me-2 fs-6"></i>Add Client</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -306,9 +347,7 @@ function ClientList() {
                     </div>
                 </div>
             </div>
-
-            
-        </div>
+    </div>
         </Layout>
         
     );
