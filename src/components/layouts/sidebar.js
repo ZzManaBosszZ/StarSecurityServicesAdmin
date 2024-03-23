@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 function Sidebar() {
+    
 
     const [collapsedMenus, setCollapsedMenus] = useState({});
 
@@ -28,32 +29,11 @@ function Sidebar() {
 
 
                 <ul className="menu-list flex-grow-1 mt-3">
-
-                    <li class={collapsedMenus.project ? "active" : "collapsed"}>
-                        <a class="m-link" data-bs-toggle="collapse" data-bs-target="#project-Components" href="#" onClick={() => toggleSubMenu('project')}>
-                            <i class="icofont-briefcase"></i><span>Projects</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                        <ul className={collapsedMenus.project ? "sub-menu collapse show" : "sub-menu collapse"} id="project-Components">
-                            <li><a class="ms-link" href="projects.html"><span>Projects</span></a></li>
-                            <li><a class="ms-link" href="task.html"><span>Tasks</span></a></li>
-                            <li><a class="ms-link" href="timesheet.html"><span>Timesheet</span></a></li>
-                            <li><a class="ms-link" href="team-leader.html"><span>Leaders</span></a></li>
-                        </ul>
-                    </li>
-
-                    <li className="collapsed">
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#tikit-Components" href="#"><i
-                            className="icofont-ticket"></i> <span>Tickets</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-
-                        <ul className="sub-menu collapse" id="tikit-Components">
-                            <li><a className="ms-link" href="tickets.html"> <span>Tickets View</span></a></li>
-                            <li><a className="ms-link" href="ticket-detail.html"> <span>Ticket Detail</span></a></li>
-                        </ul>
-                    </li>
                     <li class={collapsedMenus.client ? "active" : "collapsed"}>
                         <a class="m-link" data-bs-toggle="collapse" data-bs-target="#client-Components" href="#" onClick={() => toggleSubMenu('client')}><i
                             class="icofont-user-male"></i> <span>Our Clients</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                         <ul className={collapsedMenus.client ? "sub-menu collapse show" : "sub-menu collapse"} id="client-Components">
-                            <Link to="/profileclientlist"><li><a class="ms-link" ><span>Clients</span></a></li></Link>
+                            <Link to="/client-list"><li><a class="ms-link" ><span>Clients</span></a></li></Link>
                             <li><a class="ms-link" href="profile.html"> <span>Client Profile</span></a></li>
                         </ul>
                     </li>
@@ -75,44 +55,18 @@ function Sidebar() {
 
                     <li className={collapsedMenus.servicesorder ? "active" : "collapsed"}>
                         <a className="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#" onClick={() => toggleSubMenu('servicesorder')}><i
-                            className="icofont-ui-calculator"></i> <span>Accounts</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-
+                            className="icofont-ui-calculator"></i> <span>Services</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                         <ul className={collapsedMenus.servicesorder ? "sub-menu collapse show" : "sub-menu collapse"} id="menu-Componentsone">
-                            <li><a className="ms-link" href="invoices.html"><span>Invoices</span> </a></li>
-                            <li><a className="ms-link" href="payments.html"><span>Payments</span> </a></li>
-                            <li><a className="ms-link" href="expenses.html"><span>Expenses</span> </a></li>
-                            <li><a className="ms-link" href="create-invoice.html"><span>Create Invoice</span> </a></li>
+                            <Link to="/service-list"><li><a className="ms-link"><span>List</span> </a></li></Link>
                         </ul>
                     </li>
                     <li className="collapsed">
                         <a className="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components" href="#"><i
-                            className="icofont-users-alt-5"></i> <span>Payroll</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
+                            className="icofont-users-alt-5"></i> <span>Service Offer</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
 
                         <ul className="sub-menu collapse" id="payroll-Components">
-                            <li><a className="ms-link" href="salaryslip.html"><span>Employee Salary</span> </a></li>
+                            <li><a className="ms-link" href="salaryslip.html"><span>Offer Detail</span> </a></li>
 
-                        </ul>
-                    </li>
-                    <li className="collapsed">
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#app-Components" href="#">
-                            <i className="icofont-contrast"></i> <span>App</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-
-                        <ul className="sub-menu collapse" id="app-Components">
-                            <li><a className="ms-link" href="calendar.html"> <span>Calander</span></a></li>
-                            <li><a className="ms-link" href="chat.html"><span>Chat App</span></a></li>
-                        </ul>
-                    </li>
-                    <li className="collapsed">
-
-                        <ul className="sub-menu collapse" id="extra-Components">
-                            <li><a className="ms-link" href="charts.html"> <span>Apex Charts</span></a></li>
-                            <li><a className="ms-link" href="forms.html"><span>Forms Example</span></a></li>
-                            <li><a className="ms-link" href="table.html"> <span>Table Example</span></a></li>
-                            <li><a className="ms-link" href="review.html"><span>Reviews Page</span></a></li>
-                            <li><a className="ms-link" href="icon.html"><span>Icons</span></a></li>
-                            <li><a className="ms-link" href="contact.html"><span>Contact</span></a></li>
-                            <li><a className="ms-link" href="widgets.html"><span>Widgets</span></a></li>
-                            <li><a className="ms-link" href="todo-list.html"><span>Todo-List</span></a></li>
                         </ul>
                     </li>
                 </ul>

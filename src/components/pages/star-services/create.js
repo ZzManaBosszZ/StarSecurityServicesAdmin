@@ -7,8 +7,7 @@ function ServiceCreate() {
             <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title  fw-bold" id="createprojectlLabel"> Create Project</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title  fw-bold" id="createprojectlLabel"> Create Service</h5>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">

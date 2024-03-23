@@ -1,5 +1,5 @@
 import Layout from "../../layouts";
-
+import { Link } from "react-router-dom";
 function ServiceList() {
     return ( 
         <Layout>
@@ -10,7 +10,7 @@ function ServiceList() {
                     <div class="card-header p-0 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                         <h3 class="fw-bold py-3 mb-0">Projects</h3>
                         <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
-                            <button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal" data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Create Project</button>
+                            <Link to="/service-create"><button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal" data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Create Service</button></Link>
                             <ul class="nav nav-tabs tab-body-header rounded ms-3 prtab-set w-sm-100" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#All-list" role="tab">All</a></li>
                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#Started-list" role="tab">Started</a></li>
@@ -83,7 +83,7 @@ function ServiceList() {
                                                 <h4 class="small fw-bold mb-0">Progress</h4>
                                                 <span class="small light-danger-bg  p-1 rounded"><i class="icofont-ui-clock"></i> 35 Days Left</span>
                                             </div>
-                                            <div class="progress" style={{height: "8px;"}}>
+                                            <div class="progress" style={{height: "8px"}}>
                                                 <div class="progress-bar bg-secondary" role="progressbar" style={{width: "25%"}} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                                                 <div class="progress-bar bg-secondary ms-1" role="progressbar" style={{width: "25%"}} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                                                 <div class="progress-bar bg-secondary ms-1" role="progressbar" style={{width: "10%"}} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
