@@ -71,7 +71,7 @@ function Login() {
                     } else {
                         let redirectUrl = "/";
                         if (accountRole === "Super Admin") {
-                            redirectUrl = "/";
+                            redirectUrl = "/home";
                         } 
                         navigate(redirectUrl);
                     }
