@@ -18,10 +18,15 @@ function Login() {
         password: "",
     });
 
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setFormData({ ...formData, [name]: value });
+    //     setFormErrors({ ...formErrors, [name]: "" });
+    // };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        setFormErrors({ ...formErrors, [name]: "" });
     };
 
     const validateForm = () => {
@@ -53,15 +58,17 @@ function Login() {
 
         if (validateForm()) {
             try {
-                const loginRequest = await api.post(url.AUTH.LOGIN, formData);
-
+                const loginRequest = await api.post(url.AUTH.LOGIN, formData);   
                 if (loginRequest.status === 200) {
-                    const token = loginRequest.data.data;
+                    const token = loginRequest.data.token;
                     setAccessToken(token);
                     // Check user permissions
                     const decodedToken = getDecodedToken();
-                    const accountRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
+                    // let redirectUrl = "/";
+                    // navigate(redirectUrl);
+
+                    const accountRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
                     if (accountRole === "User") {
                         removeAccessToken();
                         setFormErrors({
@@ -70,18 +77,17 @@ function Login() {
                         });
                     } else {
                         let redirectUrl = "/";
-                        if (accountRole === "Super Admin") {
-                            redirectUrl = "/";
-                        } 
+                        
                         navigate(redirectUrl);
                     }
                 } else {
                     setFormErrors({
-                        email: "Invalid email or password.",
+                        email: "Invalid email or",
                         password: "Invalid email or password.",
                     });
                 }
-            } catch (error) {
+            } 
+            catch (error) {
                 setFormErrors({
                     email: "Invalid email or password.",
                     password: "Invalid email or password.",
@@ -150,7 +156,7 @@ function Login() {
                                                 </div>
                                                 <input
                                                     type="password"
-                                                    className={`form-control form-control-lg ${formErrors.email ? "is-invalid" : ""}`}
+                                                    className={`form-control form-control-lg ${formErrors.password ? "is-invalid" : ""}`}
                                                     id="password"
                                                     name="password"
                                                     value={formData.password}

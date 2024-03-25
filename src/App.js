@@ -1,6 +1,4 @@
 import {BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { useJwt } from "react-jwt";
-import { getAccessToken, removeAccessToken } from "./components/pages/utils/auth";
 import Dashboard from "./components/pages/dashboard/home";
 import Login from "./components/pages/auth/login";
 import ForgotPassword from "./components/pages/auth/forgot-password";
@@ -18,6 +16,8 @@ import ServiceDelete from "./components/pages/star-services/delete";
 import ServiceDetail from "./components/pages/star-services/detail";
 import OfferDetail from "./components/pages/star-services-offer/detail";
 import OfferList from "./components/pages/star-services-offer";
+import { useJwt } from "react-jwt";
+import { getAccessToken, removeAccessToken } from "./components/pages/utils/auth";
 function App() {
 
   const ProtectedRoute = ({ element }) => {
