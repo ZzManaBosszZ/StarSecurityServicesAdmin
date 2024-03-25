@@ -53,9 +53,9 @@ function ClientList() {
                                 <h3 className=" fw-bold flex-fill mb-0">Clients</h3>
                                 <div className="col-auto d-flex">
                                     <div className="dropdown ">
-                                        <button className="btn btn-primary dropdown-toggle  " type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {/* <button className="btn btn-primary dropdown-toggle  " type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                             Status
-                                        </button>
+                                        </button> */}
                                         <ul className="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
                                         <li><a className="dropdown-item" href="#">Company</a></li>
                                         <li><a className="dropdown-item" href="#">AgilSoft Tech</a></li>
@@ -66,7 +66,7 @@ function ClientList() {
                                         <li><a className="dropdown-item" href="#">Design Tech</a></li>
                                         </ul>
                                     </div>
-                                    <Link to="/profileclient-create">
+                                    <Link to="/employee-create">
                                     <button type="button" className="btn btn-dark ms-1 " data-bs-toggle="modal" data-bs-target="#createproject"><i className="icofont-plus-circle me-2 fs-6"></i>Add Client</button>
                                     </Link>
                                 </div>

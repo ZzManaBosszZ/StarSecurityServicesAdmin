@@ -1,14 +1,34 @@
+import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { removeAccessToken } from "../pages/utils/auth";
+import api from "../services/api";
+import url from "../services/url";
+
 
 function Navheader() {
-    return(
-        <div className="header">
-        <nav className="navbar py-4">
-            <div className="container-xxl">
 
-                <div className="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
-                    <div className="d-flex">
-                        
-                        <div className="avatar-list avatar-list-stacked px-3">
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleDropdownToggle = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        removeAccessToken();
+        navigate("/login");
+    };
+
+    return (
+        <div className="header">
+            <nav className="navbar py-4">
+                <div className="container-xxl">
+
+                    <div className="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
+                        <div className="d-flex">
+
+                            {/* <div className="avatar-list avatar-list-stacked px-3">
                             <img className="avatar rounded-circle" src="assets/images/xs/avatar2.jpg" alt=""/>
                             <img className="avatar rounded-circle" src="assets/images/xs/avatar1.jpg" alt=""/>
                             <img className="avatar rounded-circle" src="assets/images/xs/avatar3.jpg" alt=""/>
@@ -16,9 +36,9 @@ function Navheader() {
                             <img className="avatar rounded-circle" src="assets/images/xs/avatar7.jpg" alt=""/>
                             <img className="avatar rounded-circle" src="assets/images/xs/avatar8.jpg" alt=""/>
                             <span className="avatar rounded-circle text-center pointer" data-bs-toggle="modal" data-bs-target="#addUser"><i className="icofont-ui-add"></i></span>
+                        </div> */}
                         </div>
-                    </div>
-                    <div className="dropdown notifications">
+                        {/* <div className="dropdown notifications">
                         <a className="nav-link dropdown-toggle pulse" href="#" role="button" data-bs-toggle="dropdown">
                             <i className="icofont-alarm fs-5"></i>
                             <span className="pulse-ring"></span>
@@ -94,39 +114,42 @@ function Navheader() {
                                 <a className="card-footer text-center border-top-0" href="#"> View all notifications</a>
                             </div>
                         </div>
-                    </div>
-                    <div className="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center">
-                        <div className="u-info me-2">
-                            <p className="mb-0 text-end line-height-sm "><span className="font-weight-bold">Dylan Hunter</span></p>
-                            <small>Admin Profile</small>
-                        </div>
-                        <a className="nav-link dropdown-toggle pulse p-0" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static">
-                            <img className="avatar lg rounded-circle img-thumbnail" src="assets/images/profile_av.png" alt="profile"/>
-                        </a>
-                        <div className="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
-                            <div className="card border-0 w280">
-                                <div className="card-body pb-0">
-                                    <div className="d-flex py-1">
-                                        <img className="avatar rounded-circle" src="assets/images/profile_av.png" alt="profile"/>
-                                        <div className="flex-fill ms-3">
-                                            <p className="mb-0"><span className="font-weight-bold">Dylan Hunter</span></p>
-                                            <small className="">Dylan.hunter@gmail.com</small>
+                    </div> */}
+                        <div className="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center">
+                            <div className="u-info me-2">
+                                <p className="mb-0 text-end line-height-sm "><span className="font-weight-bold">Dylan Hunter</span></p>
+                                <small>Admin Profile</small>
+                            </div>
+                            <a className="nav-link dropdown-toggle pulse p-0" role="button" data-bs-toggle="dropdown" data-bs-display="static" onClick={handleDropdownToggle}>
+                                <img className="avatar lg rounded-circle img-thumbnail" src="assets/images/profile_av.png" alt="profile" />
+                            </a>
+                            {isOpen && (
+                                <div className=" rounded-lg shadow border-0 dropdown-animation p-0 m-0">
+                                    <div className="card border-0 w280">
+                                        <div className="card-body pb-0">
+                                            <div className="d-flex py-1">
+                                                <img className="avatar rounded-circle" src="assets/images/profile_av.png" alt="profile" />
+                                                <div className="flex-fill ms-3">
+                                                    <p className="mb-0"><span className="font-weight-bold">Dylan Hunter</span></p>
+                                                    <small className="">Dylan.hunter@gmail.com</small>
+                                                </div>
+                                            </div>
+
+                                            <div><hr className="dropdown-divider border-dark" /></div>
+                                        </div>
+                                        <div className="list-group m-2 ">
+                                            {/* <a href="task.html" className="list-group-item list-group-item-action border-0 "><i className="icofont-tasks fs-5 me-3"></i>My Task</a>
+                                    <a href="members.html" className="list-group-item list-group-item-action border-0 "><i className="icofont-ui-user-group fs-6 me-3"></i>members</a> */}
+                                            <Link to="/profile" className="list-group-item list-group-item-action border-0 "><i className="icofont-profile fs-6 me-3"></i>Profile</Link>
+                                            <Link to="/login" onClick={handleLogout} className="list-group-item list-group-item-action border-0 "><i className="icofont-logout fs-6 me-3"></i>Log Out</Link>
+                                            <div><hr className="dropdown-divider border-dark" /></div>
                                         </div>
                                     </div>
-                                    
-                                    <div><hr className="dropdown-divider border-dark"/></div>
                                 </div>
-                                <div className="list-group m-2 ">
-                                    <a href="task.html" className="list-group-item list-group-item-action border-0 "><i className="icofont-tasks fs-5 me-3"></i>My Task</a>
-                                    <a href="members.html" className="list-group-item list-group-item-action border-0 "><i className="icofont-ui-user-group fs-6 me-3"></i>members</a>
-                                    <a href="ui-elements/auth-signin.html" className="list-group-item list-group-item-action border-0 "><i className="icofont-logout fs-6 me-3"></i>Signout</a>
-                                    <div><hr className="dropdown-divider border-dark"/></div>
-                                    <a href="ui-elements/auth-signup.html" className="list-group-item list-group-item-action border-0 "><i className="icofont-contact-add fs-5 me-3"></i>Add personal account</a>
-                                </div>
-                            </div>
+                            )}
                         </div>
-                    </div>
-                    <div className="px-md-1">
+
+                        {/* <div className="px-md-1">
                         <a href="#offcanvas_setting" data-bs-toggle="offcanvas" aria-expanded="false" title="template setting">
                             <svg className="svg-stroke" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -134,27 +157,27 @@ function Navheader() {
                                 <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
                             </svg>
                         </a>
+                    </div> */}
                     </div>
-                </div>
 
 
-                <button className="navbar-toggler p-0 border-0 menu-toggle order-3" type="button" data-bs-toggle="collapse" data-bs-target="#mainHeader">
-                    <span className="fa fa-bars"></span>
-                </button>
+                    <button className="navbar-toggler p-0 border-0 menu-toggle order-3" type="button" data-bs-toggle="collapse" data-bs-target="#mainHeader">
+                        <span className="fa fa-bars"></span>
+                    </button>
 
 
-                <div className="order-0 col-lg-4 col-md-4 col-sm-12 col-12 mb-3 mb-md-0 ">
-                    <div className="input-group flex-nowrap input-group-lg">
-                        <button type="button" className="input-group-text" id="addon-wrapping"><i className="fa fa-search"></i></button>
-                        <input type="search" className="form-control" placeholder="Search" aria-label="search" aria-describedby="addon-wrapping"/>
-                        <button type="button" className="input-group-text add-member-top" id="addon-wrappingone" data-bs-toggle="modal" data-bs-target="#addUser"><i className="fa fa-plus"></i></button>
+                    <div className="order-0 col-lg-4 col-md-4 col-sm-12 col-12 mb-3 mb-md-0 ">
+                        <div className="input-group flex-nowrap input-group-lg">
+                            <button type="button" className="input-group-text" id="addon-wrapping"><i className="fa fa-search"></i></button>
+                            <input type="search" className="form-control" placeholder="Search" aria-label="search" aria-describedby="addon-wrapping" />
+                            <button type="button" className="input-group-text add-member-top" id="addon-wrappingone" data-bs-toggle="modal" data-bs-target="#addUser"><i className="fa fa-plus"></i></button>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-        </nav>
-    </div>
-    
+                </div>
+            </nav>
+        </div>
+
     );
 }
 

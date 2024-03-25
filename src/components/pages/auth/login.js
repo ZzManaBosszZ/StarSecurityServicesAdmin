@@ -174,7 +174,7 @@ function Login() {
                                             </div> */}
                                         </div>
                                         <div className="col-12 text-center mt-4">
-                                            <button type="submit" className="btn btn-lg btn-block btn-light lift text-uppercase" atl="signin">SIGN IN</button>
+                                            <button type="submit" className="btn btn-lg btn-block btn-light lift text-uppercase" atl="login">SIGN IN</button>
                                         </div>
                                     </form>
                                 </div>

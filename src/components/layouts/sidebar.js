@@ -16,7 +16,7 @@ function Sidebar() {
     return (
         <div className="sidebar px-4 py-4 py-md-5 me-0">
             <div className="d-flex flex-column h-100">
-                <Link to="/home" className="mb-0 brand-icon">
+                <Link to="/" className="mb-0 brand-icon">
                     <span className="logo-icon">
                         <svg width="35" height="35" fill="currentColor" className="bi bi-clipboard-check" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
@@ -42,14 +42,14 @@ function Sidebar() {
                             className="icofont-users-alt-5"></i> <span>Employees</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
 
                         <ul className={collapsedMenus.emp ? "sub-menu collapse show" : "sub-menu collapse"} id="emp-Components">
-                            <li><a className="ms-link" href="members.html"> <span>Members</span></a></li>
-                            <li><a className="ms-link" href="employee-profile.html"> <span>Members Profile</span></a></li>
+                            <li><Link to="/employee-list" className="ms-link"> <span>Members</span></Link></li>
+                            <li><Link to="/department-list" className="ms-link" href="department.html"> <span>Department</span></Link></li>
+                            {/* <li><a className="ms-link" href="employee-profile.html"> <span>Members Profile</span></a></li>
                             <li><a className="ms-link" href="holidays.html"> <span>Holidays</span></a></li>
                             <li><a className="ms-link" href="attendance-employees.html"> <span>Attendance Employees</span></a></li>
                             <li><a className="ms-link" href="attendance.html"> <span>Attendance</span></a></li>
                             <li><a className="ms-link" href="leave-request.html"> <span>Leave Request</span></a></li>
-                            <li><a className="ms-link" href="department.html"> <span>Department</span></a></li>
-                            <li><a className="ms-link" href="loan.html"> <span>Loan</span></a></li>
+                            <li><a className="ms-link" href="loan.html"> <span>Loan</span></a></li> */}
                         </ul>
                     </li>
 
@@ -71,9 +71,9 @@ function Sidebar() {
                     </li>
                 </ul>
 
-                <button type="button" className="btn btn-link sidebar-mini-btn text-light">
+                {/* <button type="button" className="btn btn-link sidebar-mini-btn text-light">
                     <span className="ms-2"><i className="icofont-bubble-right"></i></span>
-                </button>
+                </button> */}
             </div>
         </div>
     );

@@ -6,8 +6,8 @@ import ResetPassword from "./components/pages/auth/reset-password";
 import ClientCreate from "./components/pages/clients/create";
 import ClientDetail from "./components/pages/clients/detail";
 import ClientList from "./components/pages/clients/index";
-import EmpList from "./components/pages/clients/index";
-import EmpDetail from "./components/pages/clients/detail";
+import EmpList from "./components/pages/employee/index";
+import EmpDetail from "./components/pages/employee/detail";
 import DepartmentList from "./components/pages/department/index";
 import ServiceList from "./components/pages/star-services";
 import ServiceCreate from "./components/pages/star-services/create";
@@ -16,8 +16,11 @@ import ServiceDelete from "./components/pages/star-services/delete";
 import ServiceDetail from "./components/pages/star-services/detail";
 import OfferDetail from "./components/pages/star-services-offer/detail";
 import OfferList from "./components/pages/star-services-offer";
+import Profile from "./components/pages/auth/profile";
 import { useJwt } from "react-jwt";
 import { getAccessToken, removeAccessToken } from "./components/pages/utils/auth";
+import EmpCreate from "./components/pages/employee/create";
+
 function App() {
 
   const ProtectedRoute = ({ element }) => {
@@ -50,6 +53,7 @@ const ProtectedLoginRoute = ({ element }) => {
 
         {/* Start Auth */}
         <Route path="/login" element={<ProtectedLoginRoute element={<Login />} />} />
+        <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
         <Route path="/forgot-password" element={<ProtectedLoginRoute element={<ForgotPassword />} />}/>
         <Route path="/reset-password" element={<ProtectedLoginRoute element={<ResetPassword />} />}/>
         {/* End Auth */}
@@ -73,9 +77,10 @@ const ProtectedLoginRoute = ({ element }) => {
         {/* <Route path="/employee-list" element={<EmpList />}/> */}
         {/* <Route path="/employee-detail/:id" element={<EmpProfile />}/> */}
         {/* <Route path="/employee-detail" element={<EmpDetail />}/> */}
-
+        <Route path="/employee-create" element={<ProtectedRoute element={<EmpCreate />} />} />
         <Route path="/employee-list" element={<ProtectedRoute element={<EmpList />} />} />
         <Route path="/employee-detail" element={<ProtectedRoute element={<EmpDetail />} />} />
+        
         
         {/* End Employee */}
 

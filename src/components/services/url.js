@@ -17,6 +17,7 @@ const url = {
         FORGOT_PASSWORD: "/Accounts/ForgotPassword",
         CHANGE_PASSWORD: "/Accounts/ChangePassword",
         RESET_PASSWORD: "Accounts/ResetPassword",
+        PROFILE: "",
     },
 
     CLIENT:{

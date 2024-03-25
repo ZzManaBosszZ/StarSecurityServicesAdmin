@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Layout from "../../layouts";
 
 function EmpList() {
@@ -11,11 +12,8 @@ function EmpList() {
                         <div className="card border-0 mb-4 no-bg">
                             <div className="card-header py-3 px-0 d-sm-flex align-items-center  justify-content-between border-bottom">
                                 <h3 className=" fw-bold flex-fill mb-0 mt-sm-0">Employee</h3>
-                                <button type="button" className="btn btn-dark me-1 mt-1 w-sm-100" data-bs-toggle="modal" data-bs-target="#createemp"><i className="icofont-plus-circle me-2 fs-6"></i>Add Employee</button>
+                                <Link to="/employee-create" type="button" className="btn btn-dark me-1 mt-1 w-sm-100" data-bs-toggle="modal" data-bs-target="#createemp"><i className="icofont-plus-circle me-2 fs-6"></i>Add Employee</Link>
                                 <div className="dropdown">
-                                    <button className="btn btn-primary dropdown-toggle mt-1  w-sm-100" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Status
-                                    </button>
                                     <ul className="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
                                     <li><a className="dropdown-item" href="#">All</a></li>
                                     <li><a className="dropdown-item" href="#">Task Assign Members</a></li>
@@ -54,7 +52,7 @@ function EmpList() {
                                         <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices</p>
                                     </div>
                                     <a href="task.html" className="btn btn-dark btn-sm mt-1"><i className="icofont-plus-circle me-2 fs-6"></i>Add Task</a>
-                                    <a href="employee-profile.html" className="btn btn-dark btn-sm mt-1"><i className="icofont-invisible me-2 fs-6"></i>Profile</a>
+                                    <Link to="/employee-detail" className="btn btn-dark btn-sm mt-1"><i className="icofont-invisible me-2 fs-6"></i>Profile</Link>
                                 </div>
                             </div>
                         </div>
