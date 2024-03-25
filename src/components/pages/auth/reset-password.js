@@ -1,16 +1,14 @@
 
 
-function ResetPass() {
-
+function ResetPassword() {
 
     return(
-
         <div id="mytask-layout">
 
     
     <div className="main p-2 py-3 p-xl-5">
         
-        
+       
         <div className="body d-flex p-0 p-xl-5">
             <div className="container-xxl">
 
@@ -39,24 +37,37 @@ function ResetPass() {
                             
                             <form className="row g-1 p-3 p-md-4">
                                 <div className="col-12 text-center mb-1 mb-lg-5">
-                                    <img src="../assets/images/forgot-password.svg" className="w240 mb-4" alt="" />
-                                    <h1>Forgot password?</h1>
-                                    <span>Enter the email address you used when you joined and we'll send you instructions to reset your password.</span>
+                                    <img src="../assets/images/verify.svg" className="w240 mb-4" alt="" />
+                                    <h1>Verification</h1>
+                                    <span>We sent a verification code to your email. Enter the code from the email in the field below.</span>
                                 </div>
-                                <div className="col-12">
+                                <div className="col">
                                     <div className="mb-2">
-                                        <label className="form-label">Email address</label>
-                                        <input type="email" className="form-control form-control-lg" placeholder="name@example.com"/>
+                                        <input type="email" className="form-control form-control-lg text-center" placeholder="-"/>
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="mb-2">
+                                        <input type="email" className="form-control form-control-lg text-center" placeholder="-"/>
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="mb-2">
+                                        <input type="email" className="form-control form-control-lg text-center" placeholder="-"/>
+                                    </div>
+                                </div>
+                                <div className="col">
+                                    <div className="mb-2">
+                                        <input type="email" className="form-control form-control-lg text-center" placeholder="-"/>
                                     </div>
                                 </div>
                                 <div className="col-12 text-center mt-4">
-                                    <a href="auth-two-step.html" title="" className="btn btn-lg btn-block btn-light lift text-uppercase">SUBMIT</a>
+                                    <a href="index.html" title="" className="btn btn-lg btn-block btn-light lift text-uppercase">Verify my account</a>
                                 </div>
                                 <div className="col-12 text-center mt-4">
-                                    <span className="text-muted"><a href="auth-signin.html" className="text-secondary">Back to Sign in</a></span>
+                                    <span className="text-muted">Haven't received it? <a href="#" className="text-secondary">Resend a new code.</a></span>
                                 </div>
                             </form>
-                           
                         </div>
                     </div>
                 </div> 
@@ -69,4 +80,4 @@ function ResetPass() {
 </div>
     );
 }
-export default ResetPass;
+export default ResetPassword;

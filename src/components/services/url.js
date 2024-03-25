@@ -13,7 +13,7 @@ const url = {
     },
 
     AUTH: {
-        LOGIN: "/Accounts/SignUp",
+        LOGIN: "/Accounts/SignIn",
         FORGOT_PASSWORD: "/Accounts/ForgotPassword",
         CHANGE_PASSWORD: "/Accounts/ChangePassword",
         RESET_PASSWORD: "Accounts/ResetPassword",
