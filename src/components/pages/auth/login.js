@@ -1,6 +1,6 @@
 import api from "../../services/api";
 import url from "../../services/url";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getDecodedToken, removeAccessToken, setAccessToken } from "../utils/auth";
 
@@ -151,7 +151,7 @@ function Login() {
                                                 <div className="form-label">
                                                     <span className="d-flex justify-content-between align-items-center">
                                                         Password
-                                                        <a className="text-secondary" href="auth-password-reset.html">Forgot Password?</a>
+                                                        <Link to="/forgot-password" className="text-secondary">Forgot Password?</Link>
                                                     </span>
                                                 </div>
                                                 <input

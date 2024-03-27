@@ -30,7 +30,7 @@ function Sidebar() {
 
                 <ul className="menu-list flex-grow-1 mt-3">
                     <li class={collapsedMenus.client ? "active" : "collapsed"}>
-                        <a class="m-link" data-bs-toggle="collapse" data-bs-target="#client-Components" href="#" onClick={() => toggleSubMenu('client')}><i
+                        <a class="m-link" data-bs-toggle="collapse" data-bs-target="#client-Components" onClick={() => toggleSubMenu('client')}><i
                             class="icofont-user-male"></i> <span>Our Clients</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                         <ul className={collapsedMenus.client ? "sub-menu collapse show" : "sub-menu collapse"} id="client-Components">
                             <Link to="/client-list"><li><a class="ms-link" ><span>Clients</span></a></li></Link>
@@ -38,7 +38,7 @@ function Sidebar() {
                         </ul>
                     </li>
                     <li className={collapsedMenus.emp ? "active" : "collapsed"}>
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#emp-Components" href="#" onClick={() => toggleSubMenu('emp')}><i
+                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#emp-Components" onClick={() => toggleSubMenu('emp')}><i
                             className="icofont-users-alt-5"></i> <span>Employees</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
 
                         <ul className={collapsedMenus.emp ? "sub-menu collapse show" : "sub-menu collapse"} id="emp-Components">
@@ -54,7 +54,7 @@ function Sidebar() {
                     </li>
 
                     <li className={collapsedMenus.servicesorder ? "active" : "collapsed"}>
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#" onClick={() => toggleSubMenu('servicesorder')}><i
+                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" onClick={() => toggleSubMenu('servicesorder')}><i
                             className="icofont-ui-calculator"></i> <span>Services</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                         <ul className={collapsedMenus.servicesorder ? "sub-menu collapse show" : "sub-menu collapse"} id="menu-Componentsone">
                             <Link to="/service-list"><li><a className="ms-link"><span>List</span> </a></li></Link>

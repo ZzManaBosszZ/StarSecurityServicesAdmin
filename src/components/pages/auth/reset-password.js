@@ -1,83 +1,169 @@
-
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import api from "../../services/api";
+import url from "../../services/url";
 
 function ResetPassword() {
 
-    return(
-        <div id="mytask-layout">
+    const { resetToken } = useParams();
 
-    
-    <div className="main p-2 py-3 p-xl-5">
-        
-       
-        <div className="body d-flex p-0 p-xl-5">
-            <div className="container-xxl">
+    const navigate = useNavigate();
 
-                <div className="row g-0">
-                    <div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center rounded-lg auth-h100">
-                        <div style={{ maxWidth: '25rem' }}>
-                            <div className="text-center mb-5">
-                                 <svg  width="4rem" fill="currentColor" className="bi bi-clipboard-check" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                    </svg>
-                            </div>
-                            <div className="mb-5">
-                                <h2 className="color-900 text-center">My-Task Let's Management Better</h2>
-                            </div>
-                            
-                            <div className="">
-                                <img src="../assets/images/login-img.svg" alt="login-img"/>
+    const [formData, setFormData] = useState({
+        email: "",
+        newPassword: "",
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        email: "",
+        newPassword: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        setFormErrors({ ...formErrors, [name]: "" });
+    };
+
+    const isEmailValid = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = {};
+
+        if (!formData.email) {
+            valid = false;
+            newErrors.email = "Please enter your email.";
+        } else if (!isEmailValid(formData.email)) {
+            valid = false;
+            newErrors.email = "Please enter a valid email address.";
+        }
+
+        if (!formData.newPassword) {
+            newErrors.newPassword = "Please enter a new password.";
+            valid = false;
+        } else if (formData.newPassword.length < 6) {
+            newErrors.newPassword = "New password must be at least 6 characters.";
+            valid = false;
+        } else if (formData.newPassword.length > 50) {
+            newErrors.newPassword = "New password must be less than 50 characters.";
+            valid = false;
+        }
+
+        setFormErrors(newErrors);
+
+        return valid;
+    };
+
+    const submitResponse = async (e) => {
+        e.preventDefault();
+
+        if (validateForm()) {
+            try {
+                const { email, newPassword } = formData;
+                const resetPasswordResponse = await api.post(url.AUTH.RESET_PASSWORD + `/${resetToken}`, { email, newPassword });
+
+                if (resetPasswordResponse.status === 200) {
+                    setTimeout(() => {
+                        Swal.fire({
+                            title: "Successfully!",
+                            text: "Reset password successfully!",
+                            icon: "success",
+                        });
+                    }, 2000);
+
+                    navigate("/login");
+                }
+            } catch (error) {
+                if (error.response && error.response.status === 404) {
+                    Swal.fire({
+                        title: "Oops...!",
+                        text: "Error! Token expires or expires. Please try again!",
+                        icon: "error",
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Oops...!",
+                        text: "Error! An error occurred. Please try again later",
+                        icon: "error",
+                    });
+                }
+            }
+        }
+    };
+
+    return (
+            <div className="vh-100">
+                <div className="authentication h-100">
+                    <div className="container h-100">
+                        <div className="row justify-content-center h-100 align-items-center">
+                            <div className="col-md-6">
+                                <div className="authentication-content">
+                                    <div className="row no-gutters">
+                                        <div className="col-xl-12">
+                                            <div className="auth-form">
+                                                <div className="text-center mb-3">
+                                                    {/* <Link to="/">
+                                                        <div className="text-center">
+                                                            <img src="/assets/images/logo/logo.png" alt="" />
+                                                        </div>
+                                                    </Link> */}
+                                                </div>
+                                                <h4 className="text-center mb-4">Reset Your Password</h4>
+                                                <form onSubmit={submitResponse}>
+                                                    <div className="mb-3">
+                                                        <label>
+                                                            <strong>Email</strong>
+                                                        </label>
+                                                        <input
+                                                            type="email"
+                                                            placeholder="Enter Your Email"
+                                                            className={`form-control ${formErrors.email ? "is-invalid" : ""}`}
+                                                            id="email"
+                                                            name="email"
+                                                            value={formData.email}
+                                                            onChange={handleChange}
+                                                        />
+                                                        {formErrors.email && <p className="invalid-feedback">{formErrors.email}</p>}
+                                                    </div>
+                                                    <div className="mb-3">
+                                                        <label>
+                                                            <strong>New Password</strong>
+                                                        </label>
+                                                        <input
+                                                            type="password"
+                                                            className={`form-control ${formErrors.newPassword ? "is-invalid" : ""}`}
+                                                            placeholder="New Password"
+                                                            id="newPassword"
+                                                            name="newPassword"
+                                                            value={formData.newPassword}
+                                                            onChange={handleChange}
+                                                        />
+                                                        {formErrors.newPassword && <p className="invalid-feedback">{formErrors.newPassword}</p>}
+                                                    </div>
+                                                    <div className="text-center">
+                                                        <button type="submit" className="btn btn-primary btn-block">
+                                                            Reset Password
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                                <div className="text-center mt-5">
+                                                    <Link to="/login">Back to Login</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div className="col-lg-6 d-flex justify-content-center align-items-center border-0 rounded-lg auth-h100">
-                        <div className="w-100 p-3 p-md-5 card border-0 bg-dark text-light" style={{ maxWidth: '32rem' }}>
-                            
-                            <form className="row g-1 p-3 p-md-4">
-                                <div className="col-12 text-center mb-1 mb-lg-5">
-                                    <img src="../assets/images/verify.svg" className="w240 mb-4" alt="" />
-                                    <h1>Verification</h1>
-                                    <span>We sent a verification code to your email. Enter the code from the email in the field below.</span>
-                                </div>
-                                <div className="col">
-                                    <div className="mb-2">
-                                        <input type="email" className="form-control form-control-lg text-center" placeholder="-"/>
-                                    </div>
-                                </div>
-                                <div className="col">
-                                    <div className="mb-2">
-                                        <input type="email" className="form-control form-control-lg text-center" placeholder="-"/>
-                                    </div>
-                                </div>
-                                <div className="col">
-                                    <div className="mb-2">
-                                        <input type="email" className="form-control form-control-lg text-center" placeholder="-"/>
-                                    </div>
-                                </div>
-                                <div className="col">
-                                    <div className="mb-2">
-                                        <input type="email" className="form-control form-control-lg text-center" placeholder="-"/>
-                                    </div>
-                                </div>
-                                <div className="col-12 text-center mt-4">
-                                    <a href="index.html" title="" className="btn btn-lg btn-block btn-light lift text-uppercase">Verify my account</a>
-                                </div>
-                                <div className="col-12 text-center mt-4">
-                                    <span className="text-muted">Haven't received it? <a href="#" className="text-secondary">Resend a new code.</a></span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div> 
-                
+                </div>
             </div>
-        </div>
-
-    </div>
-
-</div>
     );
 }
+
 export default ResetPassword;

@@ -4538,6 +4538,22 @@ fieldset:disabled .btn {
     --bs-pagination-font-size: 1.25rem;
     --bs-pagination-border-radius: var(--bs-border-radius-lg);
 }
+
+.pagination {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+  }
+  
+  .pagination li {
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .pagination li.active {
+    font-weight: bold;
+  }
+
 .pagination-sm {
     --bs-pagination-padding-x: 0.5rem;
     --bs-pagination-padding-y: 0.25rem;
