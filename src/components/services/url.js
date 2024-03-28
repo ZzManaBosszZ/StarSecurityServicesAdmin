@@ -42,11 +42,11 @@ const url = {
     },
 
     DEPARTMENT:{
-        LIST: "/Deparments/Get-all",
-        CREATE: "/Deparments/Create",
-        UPDATE: "/Deparments/Edit",
-        DETAIL: "/Deparments/Detail",
-        DELETE: "/Deparments/Delete",
+        LIST: "/Departments/Get-all",
+        CREATE: "/Departments/Create",
+        UPDATE: "/Departments/Edit",
+        DETAIL: "/Departments/Detail",
+        DELETE: "/Departments/Delete",
     }
 }
 export default url;

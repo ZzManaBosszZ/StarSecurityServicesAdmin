@@ -118,10 +118,10 @@ function ClientDetail() {
                                                         <h4 className="small fw-bold mb-0">Progress</h4>
                                                         <span className="small light-danger-bg  p-1 rounded"><i className="icofont-ui-clock"></i> 35 Days Left</span>
                                                     </div>
-                                                    <div classNameName="progress" style={{ height: '8px' }}>
-                                                        <div classNameName="progress-bar bg-secondary" role="progressbar" style={{ width: '25%' }} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        <div classNameName="progress-bar bg-secondary ms-1" role="progressbar" style={{ width: '25%' }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        <div classNameName="progress-bar bg-secondary ms-1" role="progressbar" style={{ width: '10%' }} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div className="progress" style={{ height: '8px' }}>
+                                                        <div className="progress-bar bg-secondary" role="progressbar" style={{ width: '25%' }} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div className="progress-bar bg-secondary ms-1" role="progressbar" style={{ width: '25%' }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div className="progress-bar bg-secondary ms-1" role="progressbar" style={{ width: '10%' }} aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -177,10 +177,10 @@ function ClientDetail() {
                                                         <h4 className="small fw-bold mb-0">Progress</h4>
                                                         <span className="small light-danger-bg  p-1 rounded"><i className="icofont-ui-clock"></i> 15 Days Left</span>
                                                     </div>
-                                                    <div classNameName="progress" style={{ height: '8px' }}>
-                                                        <div classNameName="progress-bar bg-secondary" role="progressbar" style={{ width: '25%' }} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        <div classNameName="progress-bar bg-secondary ms-1" role="progressbar" style={{ width: '25%' }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        <div classNameName="progress-bar bg-secondary ms-1" role="progressbar" style={{ width: '39%' }} aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div className="progress" style={{ height: '8px' }}>
+                                                        <div className="progress-bar bg-secondary" role="progressbar" style={{ width: '25%' }} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div className="progress-bar bg-secondary ms-1" role="progressbar" style={{ width: '25%' }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div className="progress-bar bg-secondary ms-1" role="progressbar" style={{ width: '39%' }} aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>

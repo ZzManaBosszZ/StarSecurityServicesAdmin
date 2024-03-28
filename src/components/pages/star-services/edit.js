@@ -3,20 +3,20 @@ import Layout from "../../layouts";
 function ServiceEdit() {
     return ( 
         <Layout>
-            <div class="" id="editproject" tabindex="-1"  aria-hidden="true">
-            <div class="">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title  fw-bold" id="editprojectLabel"> Edit Project</h5>
+            <div className="" id="editproject" tabindex="-1"  aria-hidden="true">
+            <div className="">
+            <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title  fw-bold" id="editprojectLabel"> Edit Project</h5>
                 </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput78" class="form-label">Project Name</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput78" value="Social Geek Made"/>
+                <div className="modal-body">
+                    <div className="mb-3">
+                        <label for="exampleFormControlInput78" className="form-label">Project Name</label>
+                        <input type="text" className="form-control" id="exampleFormControlInput78" value="Social Geek Made"/>
                     </div>
-                    <div class="mb-3">
-                        <label  class="form-label">Project Category</label>
-                        <select class="form-select" aria-label="Default select example">
+                    <div className="mb-3">
+                        <label  className="form-label">Project Category</label>
+                        <select className="form-select" aria-label="Default select example">
                             <option selected>UI/UX Design</option>
                             <option value="1">Website Design</option>
                             <option value="2">App Development</option>
@@ -30,34 +30,34 @@ function ServiceEdit() {
                             <option value="10">Other</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="formFileMultiple456" class="form-label">Project Images & Document</label>
-                        <input class="form-control" type="file" id="formFileMultiple456"/>
+                    <div className="mb-3">
+                        <label for="formFileMultiple456" className="form-label">Project Images & Document</label>
+                        <input className="form-control" type="file" id="formFileMultiple456"/>
                     </div>
-                    <div class="deadline-form">
+                    <div className="deadline-form">
                         <form>
-                            <div class="row g-3 mb-3">
-                              <div class="col">
-                                <label for="datepickerded123" class="form-label">Project Start Date</label>
-                                <input type="date" class="form-control" id="datepickerded123" value="2021-01-10"/>
+                            <div className="row g-3 mb-3">
+                              <div className="col">
+                                <label for="datepickerded123" className="form-label">Project Start Date</label>
+                                <input type="date" className="form-control" id="datepickerded123" value="2021-01-10"/>
                               </div>
-                              <div class="col">
-                                <label for="datepickerded456" class="form-label">Project End Date</label>
-                                <input type="date" class="form-control" id="datepickerded456" value="2021-04-10"/>
+                              <div className="col">
+                                <label for="datepickerded456" className="form-label">Project End Date</label>
+                                <input type="date" className="form-control" id="datepickerded456" value="2021-04-10"/>
                               </div>
                             </div>
-                            <div class="row g-3 mb-3">
-                                <div class="col-sm-12">
-                                    <label class="form-label">Notifation Sent</label>
-                                    <select class="form-select" aria-label="Default select example">
+                            <div className="row g-3 mb-3">
+                                <div className="col-sm-12">
+                                    <label className="form-label">Notifation Sent</label>
+                                    <select className="form-select" aria-label="Default select example">
                                         <option selected>All</option>
                                         <option value="1">Team Leader Only</option>
                                         <option value="2">Team Member Only</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-12">
-                                    <label for="formFileMultipleone" class="form-label">Task Assign Person</label>
-                                    <select class="form-select" multiple aria-label="Default select Priority">
+                                <div className="col-sm-12">
+                                    <label for="formFileMultipleone" className="form-label">Task Assign Person</label>
+                                    <select className="form-select" multiple aria-label="Default select Priority">
                                         <option selected>Lucinda Massey</option>
                                         <option selected value="1">Ryan Nolan</option>
                                         <option selected value="2">Oliver Black</option>
@@ -70,10 +70,10 @@ function ServiceEdit() {
                             </div>
                         </form>
                     </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-sm">
-                            <label for="formFileMultipleone" class="form-label">Priority</label>
-                            <select class="form-select" aria-label="Default select Priority">
+                    <div className="row g-3 mb-3">
+                        <div className="col-sm">
+                            <label for="formFileMultipleone" className="form-label">Priority</label>
+                            <select className="form-select" aria-label="Default select Priority">
                                 <option selected>Medium</option>
                                 <option value="1">Highest</option>
                                 <option value="2">Low</option>
@@ -81,14 +81,14 @@ function ServiceEdit() {
                             </select>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea786" class="form-label">Description (optional)</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea786" rows="3">Social Geek Made,lorem urna commodo sem. Pellentesque venenatis leo quam, sed mattis sapien lobortis ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                    <div className="mb-3">
+                        <label for="exampleFormControlTextarea786" className="form-label">Description (optional)</label>
+                        <textarea className="form-control" id="exampleFormControlTextarea786" rows="3">Social Geek Made,lorem urna commodo sem. Pellentesque venenatis leo quam, sed mattis sapien lobortis ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
                         </textarea>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Edit</button>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-primary">Edit</button>
                 </div>
             </div>
             </div>

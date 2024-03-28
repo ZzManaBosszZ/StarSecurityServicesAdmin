@@ -18,12 +18,6 @@ function Login() {
         password: "",
     });
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData({ ...formData, [name]: value });
-    //     setFormErrors({ ...formErrors, [name]: "" });
-    // };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
