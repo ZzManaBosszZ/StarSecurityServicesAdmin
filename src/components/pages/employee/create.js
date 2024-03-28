@@ -1,100 +1,221 @@
 import Layout from "../../layouts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import api from "../../services/api";
+import url from "../../services/url";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 function EmpCreate() {
 
-    const [showModal, setShowModal] = useState(false);
-    const [formData, setFormData] = useState({
-        clientName: '',
-        clientName1: '',
-        companyName1: '',
-        companyName2: '',
-        companyName3: '',
-        companyName4: '',
-        companyName5: '',
-        // Add more fields as needed
+    const [formEmployee, setFormEmployee] = useState({
+        name: "",
+        address: "",
+        contactNumber: "",
+        // employee_image: null,
+        educationalQualification: "",
+        role: "",
+        department: "",
+        // grade: "",
+        // client: "",
+        achievements: "",
     });
 
-      // Define function that will open the modal
-  const handleOpen = () => {
-    setShowModal(true);
-  };
+    const [userRole, setUserRole] = useState(null);
+    const [error, setError] = useState(null);
+    const [errors, setErrors] = useState({});
+    const [nameExistsError, setNameExistsError] = useState("");
+    const navigate = useNavigate();
 
-  // Define function that will close the modal
-  const handleClose = () => {
-    setShowModal(false);
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const isFormValid = validateForm();
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        if (isFormValid) {
+            // const userToken = localStorage.getItem("access_token");
+            // api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+            try {
+                const response = await api.post(url.EMPLOYEE.CREATE, formEmployee, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                });
+                if (response && response.data) {
+                    // console.log(response.data);
+                    toast.success("Create Employee Successffuly.", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                    setTimeout(() => {
+                        navigate(`/employee-list`); //chuyển đến trang employee-list
+                    }, 3000);
+                } else {
+                }
+            } catch (error) {
+                if (error.response.status === 400 && error.response.data.message === "Employee already exists") {
+                    setNameExistsError("The Employee name already exists");
+                    toast.error("The Employee name already exists", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                } else {
+                    toast.error("Unable to create Employee, please try again", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                }
+                // console.error("Error creating test:", error);
+                // console.error("Response data:", error.response.data);
+            }
+        }
     };
 
-    const handleCreateClient = () => {
-        // Add your logic here to handle creating the client
-        console.log('Form Data:', formData);
-        // You can send form data to an API, update state, etc.
-        setShowModal(false); // Close the modal after handling form submission
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = {};
+        if (formEmployee.name === "") {
+            newErrors.name = "Please enter employee name ";
+            valid = false;
+        } 
+        else if (formEmployee.name.length < 3) {
+            newErrors.name = "Enter at least 3 characters";
+            valid = false;
+        } 
+        else if (formEmployee.name.length > 255) {
+            newErrors.name = "Enter up to 255 characters";
+            valid = false;
+        }
+        if (formEmployee.address === "") {
+            newErrors.address = "Please enter address";
+            valid = false;
+        }
+        if (formEmployee.employee_image === null) {
+            newErrors.employee_image = "Please choose movie photo";
+            valid = false;
+        }
+        // if (formEmployee.cover_image === null) {
+        //     newErrors.cover_image = "Please choose movie cover photo";
+        //     valid = false;
+        // }
+        if (formEmployee.contactNumber === "") {
+            newErrors.contact_number = "Please enter digit numbers";
+            valid = false;
+        } 
+        else if (formEmployee.contactNumber.length < 10) {
+            newErrors.contact_number = "Enter at least 10 digit numbers";
+            valid = false;
+        } 
+        else if (formEmployee.contactNumber.length > 10) {
+            newErrors.contact_number = "Enter at least 10 digit numbers";
+            valid = false;
+        }
+        if (formEmployee.educationalQualification === "") {
+            newErrors.educationalQualification = "Please enter Educational Qualification";
+            valid = false;
+        }
+        if (formEmployee.role === "") {
+            newErrors.role = "Please choose role";
+            valid = false;
+        }
+        if (formEmployee.department === "") {
+            newErrors.department = "Please choose department";
+            valid = false;
+        }
+        if (formEmployee.grade === "") {
+            newErrors.grade = "Please choose grade";
+            valid = false;
+        }
+        if (formEmployee.client === "") {
+            newErrors.client = "Please choose client";
+            valid = false;
+        }
+        if (formEmployee.achievements === "") {
+            newErrors.achievements = "Please enter achievements";
+            valid = false;
+        }
+        setErrors(newErrors);
+        return valid;
     };
-    return (  
+
+    const handleChange = (e) => {
+        const { name } = e.target;
+        const { value } = e.target;
+        setFormEmployee({ ...formEmployee, [name]: value });
+        setNameExistsError("");
+    };
+
+    // const handleChange = (e) => {
+    //     const { name } = e.target;
+    //     if (name === "movie_image") {
+    //         handleFileMovieChange(e, name);
+    //     } else if (name === "cover_image") {
+    //         handleFileCoverChange(e, name);
+    //     } else {
+    //         const { value } = e.target;
+    //         setFormMovie({ ...formMovie, [name]: value });
+    //     }
+    //     setNameExistsError("");
+    // };
+
+    return (
         <Layout>
-            <div class="" id="createproject" tabindex="-1"  aria-hidden="true">
-            <div class="">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title  fw-bold" id="createprojectlLabel"> Add Employee</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label htmlFor="clientName1" class="form-label">Client Name</label>
-                            <input type="text" class="form-control" id="clientName1"  value={formData.clientName} onChange={handleInputChange} placeholder="Explain what the Project Name"/>
-                        </div>
-                        <div class="mb-3">
-                            <label htmlFor="companyName1" class="form-label">Company Name</label>
-                            <input type="text" class="form-control" id="companyName1" value={formData.companyName} onChange={handleInputChange} placeholder="Explain what the Project Name"/>
-                        </div>
-                        <div class="mb-3">
-                            <label htmlFor="companyName2" class="form-label">Profile Image</label>
-                            <input class="form-control" type="file" id="companyName2" />
-                        </div>
-                        <div class="deadline-form">
-                            <form>
-                                <div class="row g-3 mb-3">
-                                <div class="col">
-                                    <label htmlFor="clientName" class="form-label">User Name</label>
-                                    <input type="text" class="form-control" id="clientName"  value={formData.clientName} onChange={handleInputChange} placeholder="User Name"/>
+            <form onSubmit={handleSubmit}>
+                    <div class="">
+                        <div class="">
+                            <div class="">
+                                <h5 class="modal-name  fw-bold" id="createprojectlLabel"> Add Employee</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label htmlFor="name" class="form-label">Employee Name</label>
+                                    <input type="text" class="form-control" id="name" onChange={handleChange} placeholder="Enter Employee name" />
+                                    {errors.name && <div className="text-danger">{errors.name}</div>}
+                                    {nameExistsError && <div className="text-danger">{nameExistsError}</div>}
                                 </div>
-                                {/* <div class="col">
-                                    <label for="exampleFormControlInput277" class="form-label">Password</label>
-                                    <input type="Password" class="form-control" id="exampleFormControlInput277" placeholder="Password"/>
+                                <div class="mb-3">
+                                    <label htmlFor="contactNum" class="form-label">Phone number</label>
+                                    <input type="text" class="form-control" id="contactNum" onChange={handleChange} placeholder="+840367640262" />
+                                    {errors.contactNumber && <div className="text-danger">{errors.contactNumber}</div>}
+                                </div>
+                                <div class="mb-3">
+                                    <label htmlFor="address" class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="address" onChange={handleChange} placeholder="123 Blue Street, SomeCity" />
+                                    {errors.address && <div className="text-danger">{errors.address}</div>}
+                                </div>
+                                <div class="mb-3">
+                                    <label htmlFor="department" class="form-label">Department</label>
+                                    <input type="text" class="form-control" id="department" onChange={handleChange} placeholder="IT Security" />
+                                    {errors.department && <div className="text-danger">{errors.department}</div>}
+                                </div>
+                                {/* <div class="mb-3">
+                                    <label htmlFor="companyName2" class="form-label">Employee Image</label>
+                                    <input class="form-control" type="file" id="companyName2"  accept=".jpg, .png, .etc"  />
+                                    {errors.employee_image && <div className="text-danger">{errors.employee_image}</div>}
                                 </div> */}
+                                <div class="mb-3">
+                                    <label htmlFor="educational_qualification" class="form-label">Educational qualification</label>
+                                    <input class="form-control" type="text" id="educational_qualification" onChange={handleChange}  placeholder="Bachelor" />
+                                    {errors.educationalQualification && <div className="text-danger">{errors.educationalQualification}</div>}
                                 </div>
-                                <div class="row g-3 mb-3">
-                                    <div class="col">
-                                        <label htmlFor="companyName3" class="form-label">Email ID</label>
-                                        <input type="email" class="form-control" id="companyName3"  value={formData.companyName} onChange={handleInputChange} placeholder="User Name"/>
-                                    </div>
-                                    <div class="col">
-                                        <label htmlFor="companyName4" class="form-label">Phone</label>
-                                        <input type="text" class="form-control" id="companyName4"  value={formData.companyName} onChange={handleInputChange} placeholder="User Name"/>
-                                    </div>
+                                <div class="mb-3">
+                                    <label htmlFor="role" class="form-label">Employee role</label>
+                                    <input class="form-control" type="text" id="role" onChange={handleChange}  placeholder="Security Analyst" />
+                                    {errors.role && <div className="text-danger">{errors.role}</div>}
                                 </div>
-                            </form>
+                                <div class="mb-3">
+                                    <label htmlFor="achievements" class="form-label">Employee achievements</label>
+                                    <input class="form-control" type="text" id="achievements" onChange={handleChange}  placeholder="Improved security protocolst" />
+                                    {errors.achievements && <div className="text-danger">{errors.achievements}</div>}
+                                </div>
+                                {/* <div class="mb-3">
+                                    <label htmlFor="companyName5" class="form-label">Description (optional)</label>
+                                    <textarea class="form-control" id="companyName5" rows="3" placeholder="Add any extra details about the request"></textarea>
+                                </div> */}
+                                {/* delete */}
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary" >Create</button>
+                            </div>
                         </div>
-                        <div class="mb-3">          
-                            <label htmlFor="companyName5" class="form-label">Description (optional)</label>
-                            <textarea class="form-control" id="companyName5" rows="3" value={formData.companyName} onChange={handleInputChange} placeholder="Add any extra details about the request"></textarea>
-                        </div> 
-                        {/* delete */}
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onClick={handleCreateClient}>Create</button>
-                    </div> 
-                </div>  
-            </div>
-           </div>
+            </form>
         </Layout>
     );
 }

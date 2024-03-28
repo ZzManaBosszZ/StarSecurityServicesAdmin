@@ -8,7 +8,7 @@ const url = {
         LIST: "/Employees/Get-all",
         CREATE: "/Employees/Create",
         UPDATE: "/Employees/Edit",
-        DETAIL: "/Employees/Detail",
+        DETAIL: "/Employees/{}",
         DELETE: "/Employees/Delete",
     },
 

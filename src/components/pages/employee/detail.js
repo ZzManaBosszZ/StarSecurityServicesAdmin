@@ -1,6 +1,45 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Layout from "../../layouts";
+import api from "../../services/api";
+import url from "../../services/url";
 
 function EmpDetail() {
+    const { id } = useParams();
+    const [userRole, setUserRole] = useState(null);
+    const [error, setError] = useState(null);
+    const [employeesDetail, setEmployeesDetail] = useState([]);
+
+    useEffect(() => {
+        const userToken = localStorage.getItem("access_token");
+        // api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        api.get(`${url.EMPLOYEE.DETAIL.replace("{}", id)}`)
+            .then((response) => {
+                setEmployeesDetail(response.data);
+            })
+            .catch((error) => {
+                // console.error("Error fetching promotion details:", error);
+            });
+    }, [id]);
+
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            const token = localStorage.getItem("access_token");
+            try {
+                const decodedToken = JSON.parse(atob(token.split(".")[1]));
+                const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                setUserRole(userRole);
+
+                if (userRole === "User" || userRole === "Shopping Center Manager Staff") {
+                    setError(true);
+                }
+            } catch (error) {
+                console.error("Error loading user role:", error);
+            }
+        };
+
+        fetchUserRole();
+    }, []);
 
     return (
         <Layout>
@@ -25,25 +64,25 @@ function EmpDetail() {
                                                 <img src="assets/images/lg/avatar3.jpg" alt="" className="avatar xl rounded-circle img-thumbnail shadow-sm" />
                                             </a>
                                             <div className="about-info d-flex align-items-center mt-3 justify-content-center flex-column">
-                                                <h6 className="mb-0 fw-bold d-block fs-6">Web Developer</h6>
-                                                <span className="text-muted small">Employee Id : 00001</span>
+                                                <h6 className="mb-0 fw-bold d-block fs-6">{employeesDetail.role}</h6>
+                                                <span className="text-muted small">Employee Id : {employeesDetail.id}</span>
                                             </div>
                                         </div>
                                         <div className="teacher-info border-start ps-xl-4 ps-md-3 ps-sm-4 ps-4 w-100">
-                                            <h6 className="mb-0 mt-2  fw-bold d-block fs-6">Luke Short</h6>
-                                            <span className="py-1 fw-bold small-11 mb-0 mt-1 text-muted">Web Designer</span>
+                                            <h6 className="mb-0 mt-2  fw-bold d-block fs-6">{employeesDetail.name}</h6>
+                                            <span className="py-1 fw-bold small-11 mb-0 mt-1 text-muted">{employeesDetail.role}</span>
                                             <p className="mt-2 small">The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy</p>
                                             <div className="row g-2 pt-2">
                                                 <div className="col-xl-5">
                                                     <div className="d-flex align-items-center">
                                                         <i className="icofont-ui-touch-phone"></i>
-                                                        <span className="ms-2 small">202-555-0174 </span>
+                                                        <span className="ms-2 small">{employeesDetail.contactNumber}</span>
                                                     </div>
                                                 </div>
                                                 <div className="col-xl-5">
                                                     <div className="d-flex align-items-center">
                                                         <i className="icofont-email"></i>
-                                                        <span className="ms-2 small">LukeShortn@gmail.com</span>
+                                                        <span className="ms-2 small">{employeesDetail.name}@gmail.com</span>
                                                     </div>
                                                 </div>
                                                 <div className="col-xl-5">
@@ -55,7 +94,7 @@ function EmpDetail() {
                                                 <div className="col-xl-5">
                                                     <div className="d-flex align-items-center">
                                                         <i className="icofont-address-book"></i>
-                                                        <span className="ms-2 small">2734  West Fork Street,EASTON 02334.</span>
+                                                        <span className="ms-2 small">{employeesDetail.address}</span>
                                                     </div>
                                                 </div>
                                             </div>

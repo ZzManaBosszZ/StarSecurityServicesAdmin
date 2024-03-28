@@ -77,12 +77,10 @@ const ProtectedLoginRoute = ({ element }) => {
         {/* End Client */}
 
         {/* Start Employee */}
-        {/* <Route path="/employee-list" element={<EmpList />}/> */}
-        {/* <Route path="/employee-detail/:id" element={<EmpProfile />}/> */}
-        {/* <Route path="/employee-detail" element={<EmpDetail />}/> */}
+        <Route path="/employee-detail/:id" element={<ProtectedRoute element={<EmpDetail />} />}/>
         <Route path="/employee-create" element={<ProtectedRoute element={<EmpCreate />} />} />
         <Route path="/employee-list" element={<ProtectedRoute element={<EmpList />} />} />
-        <Route path="/employee-detail" element={<ProtectedRoute element={<EmpDetail />} />} />
+        {/* <Route path="/employee-detail" element={<ProtectedRoute element={<EmpDetail />} />} /> */}
         
         
         {/* End Employee */}

@@ -34,7 +34,6 @@ function Sidebar() {
                             class="icofont-user-male"></i> <span>Our Clients</span> <span class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                         <ul className={collapsedMenus.client ? "sub-menu collapse show" : "sub-menu collapse"} id="client-Components">
                             <Link to="/client-list"><li><a class="ms-link" ><span>Clients</span></a></li></Link>
-                            <li><a class="ms-link" href="profile.html"> <span>Client Profile</span></a></li>
                         </ul>
                     </li>
                     <li className={collapsedMenus.emp ? "active" : "collapsed"}>
@@ -61,7 +60,7 @@ function Sidebar() {
                         </ul>
                     </li>
                     <li className="collapsed">
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components" href="#"><i
+                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components"><i
                             className="icofont-users-alt-5"></i> <span>Service Offer</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
 
                         <ul className="sub-menu collapse" id="payroll-Components">
