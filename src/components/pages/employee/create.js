@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import api from "../../services/api";
 import url from "../../services/url";
 import { toast } from "react-toastify";
+import Select from "react-select";
 import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 function EmpCreate() {
 
     const [formEmployee, setFormEmployee] = useState({
+        id: "",
         name: "",
         address: "",
         contactNumber: "",
@@ -15,7 +18,7 @@ function EmpCreate() {
         grade: "",
         client: "",
         achievements: "",
-        department: [],
+        departmentIDs: [],
     });
 
     // const [userRole, setUserRole] = useState(null);
@@ -45,15 +48,13 @@ function EmpCreate() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const isFormValid = true;
+        const isFormValid = validateForm();
 
         if (isFormValid) {
-            // const userToken = localStorage.getItem("access_token");
-            // api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+            const userToken = localStorage.getItem("access_token");
+            api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
             try {
-                const response = await api.post(url.EMPLOYEE.CREATE, formEmployee, {
-                    headers: { "Content-Type": "application/json" },
-                });
+                const response = await api.post(url.EMPLOYEE.CREATE, formEmployee);
                 if (response && response.data) {
                     toast.success("Create Employee Successffuly.", {
                         // position: toast.POSITION.TOP_RIGHT,
@@ -86,6 +87,10 @@ function EmpCreate() {
     const validateForm = () => {
         let valid = true;
         const newErrors = {};
+        if (formEmployee.id === "") {
+            newErrors.id = "Please enter employee ID ";
+            valid = false;
+        }
         if (formEmployee.name === "") {
             newErrors.name = "Please enter employee name ";
             valid = false;
@@ -126,8 +131,8 @@ function EmpCreate() {
             newErrors.role = "Please choose role";
             valid = false;
         }
-        if (formEmployee.department === "") {
-            newErrors.department = "Please choose department";
+        if (formEmployee.departmentIDs === "") {
+            newErrors.departmentIDs = "Please choose department";
             valid = false;
         }
         if (formEmployee.grade === "") {
@@ -148,15 +153,11 @@ function EmpCreate() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormEmployee({...formEmployee, [name]: value });
+        setFormEmployee({ ...formEmployee, [name]: value });
 
         setNameExistsError("");
-        // setSelectedDepartment(e.target.value);
     };
 
-    const handleDepartmentChange = (event) => {
-        setSelectedDepartment(event.target.value);
-    };
 
 
 
@@ -167,66 +168,114 @@ function EmpCreate() {
                     <h5 class="modal-name  fw-bold" id="createprojectlLabel"> Add Employee</h5>
                 </div>
                 <div class="modal-body">
-                <div class="mb-3">
-                        <label htmlFor="id" class="form-label">Employee id</label>
-                        <input type="text" class="form-control" id="id" onChange={handleChange} placeholder="Enter Employee name" />
-                        {errors.id && <div className="text-danger">{errors.id}</div>}
-                        {nameExistsError && <div className="text-danger">{nameExistsError}</div>}
+                    <div class="mb-3">
+                        <label htmlFor="id" class="form-label">Employee ID</label>
+                        <input type="text"
+                            class="form-control"
+                            id="id"
+                            name="id"
+                            value={formEmployee.id}
+                            onChange={handleChange}
+                            placeholder="EMP 01 " />
+                         {errors.id && <div className="text-danger">{errors.id}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="name" class="form-label">Employee Name</label>
-                        <input type="text" class="form-control" id="name" onChange={handleChange} placeholder="Enter Employee name" />
+                        <input type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                            value={formEmployee.name}
+                            onChange={handleChange}
+                            placeholder="Enter Employee name" />
                         {errors.name && <div className="text-danger">{errors.name}</div>}
                         {nameExistsError && <div className="text-danger">{nameExistsError}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="contactNumber" class="form-label">Phone number</label>
-                        <input type="text" class="form-control" id="contactNumber" onChange={handleChange} placeholder="+840367640262" />
+                        <input type="text"
+                            class="form-control"
+                            id="contactNumber"
+                            name="contactNumber"
+                            value={formEmployee.contactNumber}
+                            onChange={handleChange}
+                            placeholder="+840367640262" />
                         {errors.contactNumber && <div className="text-danger">{errors.contactNumber}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" onChange={handleChange} placeholder="123 Blue Street, SomeCity" />
+                        <input type="text"
+                            class="form-control"
+                            id="address"
+                            name="address"
+                            value={formEmployee.address}
+                            onChange={handleChange}
+                            placeholder="123 Blue Street, SomeCity" />
                         {errors.address && <div className="text-danger">{errors.address}</div>}
                     </div>
                     <div class="mb-3">
-                        <label htmlFor="department" className="form-label">Department</label>
-                        <select
-                            className="form-control"
-                            id="department"
-                            value={selectedDepartment}
-                            onChange={handleDepartmentChange}
-                        >
-                            <option value="">Select Department</option>
-                            {setDepartment.map(department => (
-                                <option key={department.value} value={department.value}>{department.label}</option>
-                            ))}
-                        </select>
-                        {errors.department && <div className="text-danger">{errors.department}</div>}
+                        <label htmlFor="departmentIDs" className="form-label">Department</label>
+                        <Select
+                            name="departmentIDs"
+                            value={setDepartment.filter((option) => formEmployee.departmentIDs.includes(option.value))}
+                            isMulti
+                            closeMenuOnSelect={false}
+                            onChange={(selectedOption) => {
+                                setFormEmployee({ ...formEmployee, departmentIDs: selectedOption.map((option) => option.value) });
+                            }}
+                            options={setDepartment}
+                            placeholder="Select Languages"
+                        />
+                        {errors.departmentIDs && <div className="text-danger">{errors.departmentIDs}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="educational_qualification" class="form-label">Educational qualification</label>
-                        <input class="form-control" type="text" id="educational_qualification" onChange={handleChange} placeholder="Bachelor" />
+                        <input class="form-control"
+                            type="text"
+                            id="educational_qualification"
+                            name="educationalQualification"
+                            value={formEmployee.educationalQualification}
+                            onChange={handleChange} placeholder="Bachelor" />
                         {errors.educationalQualification && <div className="text-danger">{errors.educationalQualification}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="role" class="form-label">Employee role</label>
-                        <input class="form-control" type="text" id="role" onChange={handleChange} placeholder="Security Analyst" />
+                        <input class="form-control"
+                            type="text" id="role"
+                            name="role"
+                            value={formEmployee.role}
+                            onChange={handleChange}
+                            placeholder="Security Analyst" />
                         {errors.role && <div className="text-danger">{errors.role}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="grade" class="form-label">Employee grade</label>
-                        <input class="form-control" type="text" id="grade" onChange={handleChange} placeholder="Improved security protocolst" />
+                        <input class="form-control"
+                            type="text" id="grade"
+                            value={formEmployee.grade}
+                            name="grade"
+                            onChange={handleChange}
+                            placeholder="Improved security protocolst" />
                         {errors.grade && <div className="text-danger">{errors.grade}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="client" class="form-label">Client</label>
-                        <input class="form-control" type="text" id="client" onChange={handleChange} placeholder="Improved security protocolst" />
+                        <input class="form-control"
+                            type="text" id="client"
+                            name="client"
+                            value={formEmployee.client}
+                            onChange={handleChange}
+                            placeholder="Improved security protocolst" />
                         {errors.client && <div className="text-danger">{errors.client}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="achievements" class="form-label">Employee achievements</label>
-                        <input class="form-control" type="text" id="achievements" onChange={handleChange} placeholder="Improved security protocolst" />
+                        <input class="form-control"
+                            name="achievements"
+                            type="text" id="achievements"
+                            value={formEmployee.achievements}
+                            onChange={handleChange}
+                            placeholder="Improved security protocolst" />
                         {errors.achievements && <div className="text-danger">{errors.achievements}</div>}
                     </div>
                 </div>

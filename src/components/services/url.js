@@ -17,7 +17,7 @@ const url = {
         FORGOT_PASSWORD: "/Accounts/ForgotPassword",
         CHANGE_PASSWORD: "/Accounts/ChangePassword",
         RESET_PASSWORD: "/Accounts/ResetPassword",
-        RESET_CODE: "/Accounts/ResetCode",
+        // RESET_CODE: "/Accounts/ResetCode",
         PROFILE: ""
     },
 
