@@ -45,7 +45,7 @@ const url = {
         CREATE: "/Departments/Create",
         UPDATE: "/Departments/{}",
         DETAIL: "/Departments/{}",
-        DELETE: "/Departments/Delete",
+        DELETE: "/Departments/{}",
     }
 }
 export default url;

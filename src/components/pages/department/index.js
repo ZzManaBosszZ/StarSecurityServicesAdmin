@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import api from "../../services/api";
 import url from "../../services/url";
 import ReactPaginate from "react-paginate";
 import Layout from "../../layouts";
 import Swal from "sweetalert2";
-
+import axios from "axios";
 function DepartmentList() {
     const [userRole, setUserRole] = useState(null);
     const [error, setError] = useState(null);
     const [departments, setDepartments] = useState([]);
+    const [departmentData, setDepartmentData] = useState({});
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-
+    const { id } = useParams();
     useEffect(() => {
         const loadEmployee = async () => {
             const userToken = localStorage.getItem("access_token");
@@ -38,7 +39,41 @@ function DepartmentList() {
     );
 
     // delete department
-    
+    const handleDeleteDepartment = async () => {
+        
+        const isConfirmed = await Swal.fire({
+            title: "Are you sure?",
+            text: "You want to delete selected movies?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "I'm sure",
+        });
+        if (isConfirmed.isConfirmed) {
+            const userToken = localStorage.getItem("access_token");
+            api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+            try {
+                const deleteResponse = await axios.delete(`http://localhost:7011/api/Departments/${id}`)
+                if (deleteResponse.status === 200) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Department deleted successfully!',
+                    });
+                    // console.log("data:", deleteResponse.data);
+                } else {
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while deleting the department. Please try again later.',
+                });
+                console.error("Failed to delete movie:", error);
+            }
+        }
+    };
 
     // check role
     useEffect(() => {
@@ -49,7 +84,7 @@ function DepartmentList() {
                 const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
                 setUserRole(userRole);
 
-                if (userRole === "User" || userRole === "Movie Theater Manager Staff") {
+                if (userRole === "User" || userRole === "Star Admin Staff") {
                     setError(true);
                 }
             } catch (error) {
@@ -109,7 +144,7 @@ function DepartmentList() {
                                                             <td>
                                                                 <div className="btn-group" role="group" aria-label="Basic outlined example">
                                                                     <Link to={`/department-edit/${item.departmentID}`} type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#depedit"><i className="icofont-edit text-success"></i></Link>
-                                                                    <NavLink  >
+                                                                    <NavLink  onClick={handleDeleteDepartment}>
                                                                         <button type="button" className="btn btn-outline-secondary deleterow"><i className="icofont-ui-delete text-danger"></i></button>
                                                                     </NavLink>
                                                                 </div>
