@@ -5,26 +5,42 @@ import url from "../../services/url";
 import ReactPaginate from "react-paginate";
 import Layout from "../../layouts";
 import Swal from "sweetalert2";
-
+// import axios from "axios";
 function DepartmentList() {
     const [userRole, setUserRole] = useState(null);
     const [error, setError] = useState(null);
     const [departments, setDepartments] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-    const { id } = useParams();
+    // const { id } = useParams();
+    // useEffect(() => {
+    //     const loadEmployee = async () => {
+    //         const userToken = localStorage.getItem("access_token");
+    //         api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+    //         try {
+    //             const response = await api.get(url.DEPARTMENT.LIST);
+    //             setDepartments(response.data);
+    //             setPageCount(Math.ceil(response.data.length / departmentPerPage));
+    //         } catch (error) { }
+    //     };
+    //     loadEmployee();
+    // }, [currentPage]);
+
+    
+
     useEffect(() => {
-        const loadEmployee = async () => {
-            const userToken = localStorage.getItem("access_token");
-            api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
-            try {
-                const response = await api.get(url.DEPARTMENT.LIST);
-                setDepartments(response.data);
-                setPageCount(Math.ceil(response.data.length / departmentPerPage));
-            } catch (error) { }
-        };
         loadEmployee();
     }, [currentPage]);
+    
+    const loadEmployee = async () => {
+        const userToken = localStorage.getItem("access_token");
+        api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        try {
+            const response = await api.get(url.DEPARTMENT.LIST);
+            setDepartments(response.data);
+            setPageCount(Math.ceil(response.data.length / departmentPerPage));
+        } catch (error) { }
+    };
 
     //paginate
     const departmentPerPage = 6;
@@ -38,7 +54,8 @@ function DepartmentList() {
     );
 
     // delete department
-    const handleDeleteDepartment = async () => {
+
+    const handleDeleteDepartment = async (departmentId) => {
         
         const isConfirmed = await Swal.fire({
             title: "Are you sure?",
@@ -49,32 +66,50 @@ function DepartmentList() {
             cancelButtonColor: "#d33",
             confirmButtonText: "I'm sure",
         });
+
         if (isConfirmed.isConfirmed) {
-            const userToken = localStorage.getItem("access_token");
-            api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
             try {
-                const deleteResponse = await api.delete(`${url.DEPARTMENT.DELETE.replace("{}", id)}`, departments);
-                if (deleteResponse.status === 200) {
+                const id = parseInt(departmentId);
+                // Send DELETE request to the API endpoint
+                const deleteResponse = await api.delete(`https://localhost:7011/api/Departments/${id}`);
+                // const deleteResponse = await api.delete(url.GALLERY.DELETE, {
+                //     data: idDepart,
+                // });
+                if (deleteResponse.status === 204) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Success',
                         text: 'Department deleted successfully!',
                     });
+                    loadEmployee();
                     // console.log("data:", deleteResponse.data);
                 } else {
                 }
-            } catch (error) {
+            }
+            catch (error) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: 'An error occurred while deleting the department. Please try again later.',
                 });
-                console.error("Failed to delete movie:", error);
             }
         }
-    };
+    }
+
+    
 
     // check role
+    // const handleDeleteDepartment = async (departmentId) => {
+    //     try {
+    //         const id = parseInt(departmentId);
+    //       const response = await api.delete(`https://localhost:7011/api/Departments/${id}`);
+    //     //   setMessage(response.data.message);
+    //     //   fetchDepartments();
+    //     } catch (error) {
+    //     //   setMessage('Error deleting department');
+    //       console.error(error);
+    //     }
+    //   };
     useEffect(() => {
         const fetchUserRole = async () => {
             const token = localStorage.getItem("access_token");
@@ -143,9 +178,9 @@ function DepartmentList() {
                                                             <td>
                                                                 <div className="btn-group" role="group" aria-label="Basic outlined example">
                                                                     <Link to={`/department-edit/${item.departmentID}`} type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#depedit"><i className="icofont-edit text-success"></i></Link>
-                                                                    <NavLink  onClick={handleDeleteDepartment}>
-                                                                        <button type="button" className="btn btn-outline-secondary deleterow"><i className="icofont-ui-delete text-danger"></i></button>
-                                                                    </NavLink>
+                                                                    {/* <NavLink onClick={handleDeleteDepartment}> */}
+                                                                        <button type="button" className="btn btn-outline-secondary deleterow" onClick={() => handleDeleteDepartment(item.departmentID)}><i className="icofont-ui-delete text-danger"></i></button>
+                                                                    {/* </NavLink> */}
                                                                 </div>
                                                             </td>
                                                         </tr>
