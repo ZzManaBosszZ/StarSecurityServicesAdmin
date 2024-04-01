@@ -55,6 +55,7 @@ function DepartmentEdit() {
                     Swal.fire({
                         title: "Edit Success",
                         showConfirmButton: true,
+                        icon: "success",
                         confirmButtonColor: "#3085d6",
                     });
                     setTimeout(() => {

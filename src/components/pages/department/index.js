@@ -5,12 +5,11 @@ import url from "../../services/url";
 import ReactPaginate from "react-paginate";
 import Layout from "../../layouts";
 import Swal from "sweetalert2";
-import axios from "axios";
+
 function DepartmentList() {
     const [userRole, setUserRole] = useState(null);
     const [error, setError] = useState(null);
     const [departments, setDepartments] = useState([]);
-    const [departmentData, setDepartmentData] = useState({});
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
     const { id } = useParams();
@@ -54,7 +53,7 @@ function DepartmentList() {
             const userToken = localStorage.getItem("access_token");
             api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
             try {
-                const deleteResponse = await axios.delete(`http://localhost:7011/api/Departments/${id}`)
+                const deleteResponse = await api.delete(`${url.DEPARTMENT.DELETE.replace("{}", id)}`, departments);
                 if (deleteResponse.status === 200) {
                     Swal.fire({
                         icon: 'success',
