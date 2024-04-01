@@ -12,22 +12,7 @@ function DepartmentList() {
     const [departments, setDepartments] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-    // const { id } = useParams();
-    // useEffect(() => {
-    //     const loadEmployee = async () => {
-    //         const userToken = localStorage.getItem("access_token");
-    //         api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
-    //         try {
-    //             const response = await api.get(url.DEPARTMENT.LIST);
-    //             setDepartments(response.data);
-    //             setPageCount(Math.ceil(response.data.length / departmentPerPage));
-    //         } catch (error) { }
-    //     };
-    //     loadEmployee();
-    // }, [currentPage]);
-
-    
-
+  
     useEffect(() => {
         loadEmployee();
     }, [currentPage]);
