@@ -104,7 +104,7 @@ function EmpList() {
                                                 </div>
                                                 <div className="teacher-info border-start ps-xl-4 ps-md-3 ps-sm-4 ps-4 w-100">
                                                     <h6 className="mb-0 mt-2  fw-bold d-block fs-6">
-                                                        {item.name}</h6>
+                                                        {item.employeeName}</h6>
                                                     <span className="light-info-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-11 mb-0 mt-1">{item.role}</span>
                                                     <div className="video-setting-icon mt-3 pt-3 border-top">
                                                         <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices</p>
@@ -118,7 +118,6 @@ function EmpList() {
                                         
                                     )
                                 })}
-
                             </div>
                             </div>
                         </div>

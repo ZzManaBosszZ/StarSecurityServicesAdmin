@@ -10,9 +10,9 @@ function EmpCreate() {
 
     const [formEmployee, setFormEmployee] = useState({
         id: "",
-        name: "",
+        employeeName: "",
         address: "",
-        contactNumber: "",
+        employeeContactNumber: "",
         educationalQualification: "",
         role: "",
         grade: "",
@@ -35,11 +35,11 @@ function EmpCreate() {
             api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
             try {
                 const response = await api.get(url.DEPARTMENT.LIST);
-                const genreData = response.data.map((department) => ({
+                const departmentData = response.data.map((department) => ({
                     value: department.departmentID,
                     label: department.departmentName,
                 }));
-                setSelectDepartment(genreData);
+                setSelectDepartment(departmentData);
             } catch (error) { }
         };
         fetchDepartment();
@@ -57,7 +57,7 @@ function EmpCreate() {
                 const response = await api.post(url.EMPLOYEE.CREATE, formEmployee);
                 if (response && response.data) {
                     toast.success("Create Employee Successffuly.", {
-                        // position: toast.POSITION.TOP_RIGHT,
+                        position: "top-right",
                         autoClose: 3000,
                     });
                     setTimeout(() => {
@@ -69,12 +69,12 @@ function EmpCreate() {
                 if (error.response.status === 400 && error.response.data.message === "Employee already exists") {
                     setNameExistsError("The Employee name already exists");
                     toast.error("The Employee name already exists", {
-                        // position: toast.POSITION.TOP_RIGHT,
+                        position: "top-right",
                         autoClose: 3000,
                     });
                 } else {
                     toast.error("Unable to create Employee, please try again", {
-                        // position: toast.POSITION.TOP_RIGHT,
+                        position: "top-right",
                         autoClose: 3000,
                     });
                 }
@@ -91,16 +91,16 @@ function EmpCreate() {
             newErrors.id = "Please enter employee ID ";
             valid = false;
         }
-        if (formEmployee.name === "") {
-            newErrors.name = "Please enter employee name ";
+        if (formEmployee.employeeName === "") {
+            newErrors.employeeName = "Please enter employee name ";
             valid = false;
         }
-        else if (formEmployee.name.length < 3) {
-            newErrors.name = "Enter at least 3 characters";
+        else if (formEmployee.employeeName.length < 3) {
+            newErrors.employeeName = "Enter at least 3 characters";
             valid = false;
         }
-        else if (formEmployee.name.length > 255) {
-            newErrors.name = "Enter up to 255 characters";
+        else if (formEmployee.employeeName.length > 255) {
+            newErrors.employeeName = "Enter up to 255 characters";
             valid = false;
         }
         if (formEmployee.address === "") {
@@ -111,16 +111,16 @@ function EmpCreate() {
         //     newErrors.employee_image = "Please choose movie photo";
         //     valid = false;
         // }
-        if (formEmployee.contactNumber === "") {
-            newErrors.contact_number = "Please enter digit numbers";
+        if (formEmployee.employeeContactNumber === "") {
+            newErrors.employeeContactNumber = "Please enter digit numbers";
             valid = false;
         }
-        else if (formEmployee.contactNumber.length < 10) {
-            newErrors.contact_number = "Enter at least 10 digit numbers";
+        else if (formEmployee.employeeContactNumber.length < 10) {
+            newErrors.employeeContactNumber = "Enter at least 10 digit numbers";
             valid = false;
         }
-        else if (formEmployee.contactNumber.length > 10) {
-            newErrors.contact_number = "Enter at least 10 digit numbers";
+        else if (formEmployee.employeeContactNumber.length > 10) {
+            newErrors.employeeContactNumber = "Enter at least 10 digit numbers";
             valid = false;
         }
         if (formEmployee.educationalQualification === "") {
@@ -180,27 +180,27 @@ function EmpCreate() {
                          {errors.id && <div className="text-danger">{errors.id}</div>}
                     </div>
                     <div class="mb-3">
-                        <label htmlFor="name" class="form-label">Employee Name</label>
+                        <label htmlFor="employeeName" class="form-label">Employee Name</label>
                         <input type="text"
                             class="form-control"
-                            id="name"
-                            name="name"
-                            value={formEmployee.name}
+                            id="employeeName"
+                            name="employeeName"
+                            value={formEmployee.employeeName}
                             onChange={handleChange}
                             placeholder="Enter Employee name" />
-                        {errors.name && <div className="text-danger">{errors.name}</div>}
+                        {errors.employeeName && <div className="text-danger">{errors.employeeName}</div>}
                         {nameExistsError && <div className="text-danger">{nameExistsError}</div>}
                     </div>
                     <div class="mb-3">
-                        <label htmlFor="contactNumber" class="form-label">Phone number</label>
+                        <label htmlFor="employeeContactNumber" class="form-label">Phone number</label>
                         <input type="text"
                             class="form-control"
-                            id="contactNumber"
-                            name="contactNumber"
-                            value={formEmployee.contactNumber}
+                            id="employeeContactNumber"
+                            name="employeeContactNumber"
+                            value={formEmployee.employeeContactNumber}
                             onChange={handleChange}
                             placeholder="+840367640262" />
-                        {errors.contactNumber && <div className="text-danger">{errors.contactNumber}</div>}
+                        {errors.employeeContactNumber && <div className="text-danger">{errors.employeeContactNumber}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="address" class="form-label">Address</label>
@@ -224,7 +224,7 @@ function EmpCreate() {
                                 setFormEmployee({ ...formEmployee, departmentIDs: selectedOption.map((option) => option.value) });
                             }}
                             options={setDepartment}
-                            placeholder="Select Languages"
+                            placeholder="Select Departments"
                         />
                         {errors.departmentIDs && <div className="text-danger">{errors.departmentIDs}</div>}
                     </div>
@@ -258,7 +258,7 @@ function EmpCreate() {
                             placeholder="Improved security protocolst" />
                         {errors.grade && <div className="text-danger">{errors.grade}</div>}
                     </div>
-                    <div class="mb-3">
+                    {/* <div class="mb-3">
                         <label htmlFor="client" class="form-label">Client</label>
                         <input class="form-control"
                             type="text" id="client"
@@ -267,7 +267,7 @@ function EmpCreate() {
                             onChange={handleChange}
                             placeholder="Improved security protocolst" />
                         {errors.client && <div className="text-danger">{errors.client}</div>}
-                    </div>
+                    </div> */}
                     <div class="mb-3">
                         <label htmlFor="achievements" class="form-label">Employee achievements</label>
                         <input class="form-control"

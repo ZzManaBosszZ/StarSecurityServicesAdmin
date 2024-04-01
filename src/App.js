@@ -3,7 +3,6 @@ import Dashboard from "./components/pages/dashboard/home";
 import Login from "./components/pages/auth/login";
 import ForgotPassword from "./components/pages/auth/forgot-password";
 import ResetPassword from "./components/pages/auth/reset-password";
-import ClientCreate from "./components/pages/clients/create";
 import ClientDetail from "./components/pages/clients/detail";
 import ClientList from "./components/pages/clients/index";
 import EmpList from "./components/pages/employee/index";
@@ -21,6 +20,9 @@ import EmpCreate from "./components/pages/employee/create";
 import ResetCode from "./components/pages/auth/reset-code";
 import { useJwt } from "react-jwt";
 import { getAccessToken, removeAccessToken } from "./components/pages/utils/auth";
+import DepartmentEdit from "./components/pages/department/edit";
+import DepartmentCreate from "./components/pages/department/create";
+import DepartmentDelete from "./components/pages/department/delete";
 
 
 function App() {
@@ -71,8 +73,7 @@ const ProtectedLoginRoute = ({ element }) => {
         {/* <Route path="/client-detail" element={<ClientDetail />}/> */}
         {/* <Route path="/client-create" element={<ClientCreate />}/>
         <Route path="/client-list" element={<ClientList />}/> */}
-        <Route path="/client-detail" element={<ProtectedRoute element={<ClientDetail />} />} />
-        <Route path="/client-create" element={<ProtectedRoute element={<ClientCreate />} />} />
+        <Route path="/client-detail/:id" element={<ProtectedRoute element={<ClientDetail />} />} />
         <Route path="/client-list" element={<ProtectedRoute element={<ClientList />} />} />
         {/* End Client */}
 
@@ -87,6 +88,9 @@ const ProtectedLoginRoute = ({ element }) => {
 
         {/* Start Department */}
         <Route path="/department-list" element={<ProtectedRoute element={<DepartmentList />} />}/>
+        <Route path="/department-create" element={<ProtectedRoute element={<DepartmentCreate />} />}/>
+        <Route path="/department-edit/:id" element={<ProtectedRoute element={<DepartmentEdit />} />}/>
+        <Route path="/department-delete-at" element={<ProtectedRoute element={<DepartmentDelete />} />}/>
         {/* End Department */}
 
         
@@ -99,8 +103,8 @@ const ProtectedLoginRoute = ({ element }) => {
         <Route path="/service-list" element={<ServiceList />}/> */}
 
         <Route path="/service-create" element={<ProtectedRoute element={<ServiceCreate />} />} />
-        <Route path="/service-edit" element={<ProtectedRoute element={<ServiceEdit />} />} />
-        <Route path="/service-detail" element={<ProtectedRoute element={<ServiceDetail />} />} />
+        <Route path="/service-edit/:id" element={<ProtectedRoute element={<ServiceEdit />} />} />
+        <Route path="/service-detail/{}" element={<ProtectedRoute element={<ServiceDetail />} />} />
         <Route path="/service-delete-at" element={<ProtectedRoute element={<ServiceDelete />} />} />
         <Route path="/service-list" element={<ProtectedRoute element={<ServiceList />} />} />
         {/* End Services */}

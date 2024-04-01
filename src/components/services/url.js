@@ -17,14 +17,13 @@ const url = {
         FORGOT_PASSWORD: "/Accounts/ForgotPassword",
         CHANGE_PASSWORD: "/Accounts/ChangePassword",
         RESET_PASSWORD: "/Accounts/ResetPassword",
-        // RESET_CODE: "/Accounts/ResetCode",
         PROFILE: ""
     },
 
     CLIENT:{
         LIST: "/Clients/Get-all",
         UPDATE: "/Clients/Edit",
-        DETAIL: "/Clients/Detail",
+        DETAIL: "/Clients/{}",
     },
 
     SERVICE: {
@@ -45,7 +44,7 @@ const url = {
         LIST: "/Departments/Get-all",
         CREATE: "/Departments/Create",
         UPDATE: "/Departments/Edit",
-        DETAIL: "/Departments/Detail",
+        DETAIL: "/Departments/{id}",
         DELETE: "/Departments/Delete",
     }
 }

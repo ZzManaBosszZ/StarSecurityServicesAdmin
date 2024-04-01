@@ -69,20 +69,20 @@ function EmpDetail() {
                                             </div>
                                         </div>
                                         <div className="teacher-info border-start ps-xl-4 ps-md-3 ps-sm-4 ps-4 w-100">
-                                            <h6 className="mb-0 mt-2  fw-bold d-block fs-6">{employeesDetail.name}</h6>
+                                            <h6 className="mb-0 mt-2  fw-bold d-block fs-6">{employeesDetail.employeeName}</h6>
                                             <span className="py-1 fw-bold small-11 mb-0 mt-1 text-muted">{employeesDetail.role}</span>
                                             <p className="mt-2 small">The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy</p>
                                             <div className="row g-2 pt-2">
                                                 <div className="col-xl-5">
                                                     <div className="d-flex align-items-center">
                                                         <i className="icofont-ui-touch-phone"></i>
-                                                        <span className="ms-2 small">{employeesDetail.contactNumber}</span>
+                                                        <span className="ms-2 small">{employeesDetail.employeeContactNumber}</span>
                                                     </div>
                                                 </div>
                                                 <div className="col-xl-5">
                                                     <div className="d-flex align-items-center">
                                                         <i className="icofont-email"></i>
-                                                        <span className="ms-2 small">{employeesDetail.name}@gmail.com</span>
+                                                        <span className="ms-2 small">{employeesDetail.employeeName}@gmail.com</span>
                                                     </div>
                                                 </div>
                                                 <div className="col-xl-5">

@@ -1,9 +1,47 @@
 import Layout from "../../layouts";
-
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import api from "../../services/api";
+import url from "../../services/url";
 
 function ClientDetail() {
-    return (
 
+    const { id } = useParams();
+    const [userRole, setUserRole] = useState(null);
+    const [error, setError] = useState(null);
+    const [ClientsDetail, setClientsDetail] = useState([]);
+
+    useEffect(() => {
+        const userToken = localStorage.getItem("access_token");
+        // api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        api.get(`${url.CLIENT.DETAIL.replace("{}", id)}`)
+            .then((response) => {
+                setClientsDetail(response.data);
+            })
+            .catch((error) => {
+                // console.error("Error fetching promotion details:", error);
+            });
+    }, [id]);
+
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            const token = localStorage.getItem("access_token");
+            try {
+                const decodedToken = JSON.parse(atob(token.split(".")[1]));
+                const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                setUserRole(userRole);
+
+                if (userRole === "User" || userRole === "Shopping Center Manager Staff") {
+                    setError(true);
+                }
+            } catch (error) {
+                console.error("Error loading user role:", error);
+            }
+        };
+
+        fetchUserRole();
+    }, []);
+    return (
         <Layout>
             <div className="main px-lg-4 px-md-4">
                 <div className="body d-flex py-lg-3 py-md-2">
@@ -26,8 +64,8 @@ function ClientDetail() {
                                                 <img src="assets/images/lg/avatar3.jpg" alt="" className="avatar xl rounded-circle img-thumbnail shadow-sm" />
                                             </a>
                                             <div className="about-info d-flex align-items-center mt-3 justify-content-center flex-column">
-                                                <h6 className="mb-0 fw-bold d-block fs-6">CEO</h6>
-                                                <span className="text-muted small">CLIENT ID : PXL-0001</span>
+                                                <h6 className="mb-0 fw-bold d-block fs-6">{ClientsDetail.clientName}</h6>
+                                                <span className="text-muted small">CLIENT ID : {ClientsDetail.id}</span>
                                             </div>
                                         </div>
                                         <div className="teacher-info border-start ps-xl-4 ps-md-4 ps-sm-4 ps-4 w-100">
@@ -38,16 +76,16 @@ function ClientDetail() {
                                                 <div className="col-xl-5">
                                                     <div className="d-flex align-items-center">
                                                         <i className="icofont-ui-touch-phone"></i>
-                                                        <span className="ms-2 small">202-555-0174 </span>
+                                                        <span className="ms-2 small">{ClientsDetail.clientContactNumber} </span>
                                                     </div>
                                                 </div>
                                                 <div className="col-xl-5">
                                                     <div className="d-flex align-items-center">
                                                         <i className="icofont-email"></i>
-                                                        <span className="ms-2 small">ryanogden@gmail.com</span>
+                                                        <span className="ms-2 small">{ClientsDetail.clientEmail}</span>
                                                     </div>
                                                 </div>
-                                                <div className="col-xl-5">
+                                                {/* <div className="col-xl-5">
                                                     <div className="d-flex align-items-center">
                                                         <i className="icofont-birthday-cake"></i>
                                                         <span className="ms-2 small">19/03/1980</span>
@@ -58,7 +96,7 @@ function ClientDetail() {
                                                         <i className="icofont-address-book"></i>
                                                         <span className="ms-2 small">2734  West Fork Street,EASTON 02334.</span>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
                                     </div>
