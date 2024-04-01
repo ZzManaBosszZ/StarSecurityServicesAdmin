@@ -25,7 +25,7 @@ function EmpCreate() {
     // const [error, setError] = useState(null);
     const [errors, setErrors] = useState({});
     const [nameExistsError, setNameExistsError] = useState("");
-    const [selectedDepartment, setSelectedDepartment] = useState("");
+    // const [selectedDepartment, setSelectedDepartment] = useState("");
     const [setDepartment, setSelectDepartment] = useState([]);
     const navigate = useNavigate();
 
@@ -157,9 +157,6 @@ function EmpCreate() {
 
         setNameExistsError("");
     };
-
-
-
 
     return (
         <Layout>

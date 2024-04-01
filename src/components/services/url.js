@@ -43,8 +43,8 @@ const url = {
     DEPARTMENT:{
         LIST: "/Departments/Get-all",
         CREATE: "/Departments/Create",
-        UPDATE: "/Departments/Edit",
-        DETAIL: "/Departments/{id}",
+        UPDATE: "/Departments/{}",
+        DETAIL: "/Departments/{}",
         DELETE: "/Departments/Delete",
     }
 }
