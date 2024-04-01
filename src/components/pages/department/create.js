@@ -119,7 +119,7 @@ function DepartmentCreate() {
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <Link to="/department-list" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</Link>
+                                <Link to="/service-list" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</Link>
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </div>
                         </form>

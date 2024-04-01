@@ -81,20 +81,6 @@ function DepartmentList() {
         }
     }
 
-    
-
-    // check role
-    // const handleDeleteDepartment = async (departmentId) => {
-    //     try {
-    //         const id = parseInt(departmentId);
-    //       const response = await api.delete(`https://localhost:7011/api/Departments/${id}`);
-    //     //   setMessage(response.data.message);
-    //     //   fetchDepartments();
-    //     } catch (error) {
-    //     //   setMessage('Error deleting department');
-    //       console.error(error);
-    //     }
-    //   };
     useEffect(() => {
         const fetchUserRole = async () => {
             const token = localStorage.getItem("access_token");
@@ -201,6 +187,7 @@ function DepartmentList() {
                     </div>
                 </div>
             </div>
+            
         </Layout>
 
     );

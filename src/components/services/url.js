@@ -29,9 +29,9 @@ const url = {
     SERVICE: {
         LIST: "/Services/Get-all",
         CREATE: "/Services/Create",
-        UPDATE: "/Services/Edit",
-        DETAIL: "/Services/Detail",
-        DELETE: "/Services/Delete",
+        UPDATE: "/Services/{}",
+        DETAIL: "/Services/{}",
+        DELETE: "/Services/{}",
     },
 
     SERVICE_OFFER: {

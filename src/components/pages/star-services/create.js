@@ -1,20 +1,111 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../../layouts";
+import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
+import url from "../../services/url";
+import Swal from "sweetalert2";
 
 function ServiceCreate() {
-    return ( 
+
+    const [formService, setFormService] = useState({
+        serviceName: "",
+        serviceDescription: "",
+    });
+
+    // const [userRole, setUserRole] = useState(null);
+    // const [error, setError] = useState(null);
+    const [errors, setErrors] = useState({});
+    const [nameExistsError, setNameExistsError] = useState("");
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const isFormValid = validateForm();
+
+        if (isFormValid) {
+            const userToken = localStorage.getItem("access_token");
+            api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+            try {
+                const response = await api.post(url.SERVICE.CREATE, formService);
+                if (response && response.data) {
+                    Swal.fire({
+                        title: " Success create Service",
+                        showConfirmButton: true,
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                    });
+                    setTimeout(() => {
+                        navigate(`/service-list`); //chuyển đến trang department-list
+                    }, 3000);
+                } else {
+                }
+            } catch (error) {
+                if (error.response.status === 400 && error.response.data.message === "Service already exists") {
+                    setNameExistsError("The Service name already exists");
+                    Swal.fire({
+                        title: "Unable to create Service",
+                        showConfirmButton: true,
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Unable to create Service, please try again",
+                        showConfirmButton: true,
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
+                    });
+
+                }
+                // console.error("Error creating test:", error);
+                // console.error("Response data:", error.response.data);
+            }
+        }
+    };
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = {};
+
+        if (formService.serviceName === "") {
+            newErrors.serviceName = "Please enter service name ";
+            valid = false;
+        }
+
+        setErrors(newErrors);
+        return valid;
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormService({ ...formService, [name]: value });
+
+        setNameExistsError("");
+    };
+
+    return (
         <Layout>
-            <div className="" id="createproject" tabindex="-1"  aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title  fw-bold" id="createprojectlLabel"> Create Service</h5>
-                </div>
-                <div className="modal-body">
-                    <div className="mb-3">
-                        <label for="exampleFormControlInput77" className="form-label">Project Name</label>
-                        <input type="text" className="form-control" id="exampleFormControlInput77" placeholder="Explain what the Project Name"/>
-                    </div>
-                    <div className="mb-3">
+            <div className="" id="createproject" tabindex="-1" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title  fw-bold" id="createprojectlLabel"> Create Service</h5>
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="modal-body">
+                                <div className="mb-3">
+                                    <label for="serviceName" className="form-label">Project Name</label>
+                                    <input type="text"
+                                        className="form-control"
+                                        id="serviceName"
+                                        name="serviceName"
+                                        onChange={handleChange}
+                                        placeholder="Enter the Service Name" />
+                                    {errors.departmentName && <div className="text-danger">{errors.departmentName}</div>}
+                                    {nameExistsError && <div className="text-danger">{nameExistsError}</div>}
+                                </div>
+                                {/* <div className="mb-3">
                         <label  className="form-label">Project Category</label>
                         <select className="form-select" aria-label="Default select Project Category">
                             <option selected>UI/UX Design</option>
@@ -33,9 +124,8 @@ function ServiceCreate() {
                     <div className="mb-3">
                         <label for="formFileMultipleone" className="form-label">Project Images & Document</label>
                         <input className="form-control" type="file" id="formFileMultipleone"  multiple/>
-                    </div>
-                    <div className="deadline-form">
-                        <form>
+                    </div> */}
+                                {/* <div className="deadline-form">
                             <div className="row g-3 mb-3">
                               <div className="col">
                                 <label for="datepickerded" className="form-label">Project Start Date</label>
@@ -68,9 +158,9 @@ function ServiceCreate() {
                                     </select>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div className="row g-3 mb-3">
+
+                    </div> */}
+                                {/* <div className="row g-3 mb-3">
                         <div className="col-sm">
                             <label for="formFileMultipleone" className="form-label">Budget</label>
                             <input type="number" className="form-control"/>
@@ -84,21 +174,27 @@ function ServiceCreate() {
                                 <option value="3">Lowest</option>
                             </select>
                         </div>
-                    </div>
-                    <div className="mb-3">
-                        <label for="exampleFormControlTextarea78" className="form-label">Description (optional)</label>
-                        <textarea className="form-control" id="exampleFormControlTextarea78" rows="3" placeholder="Add any extra details about the request"></textarea>
+                    </div> */}
+                                <div className="mb-3">
+                                    <label for="serviceDescription" className="form-label">Description (optional)</label>
+                                    <textarea className="form-control"
+                                        rows="3"
+                                        id="serviceDescription"
+                                        name="serviceDescription"
+                                        onChange={handleChange}
+                                        placeholder="Add any extra details about the request"></textarea>
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <Link to="/service-list" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</Link>
+                                <button type="submit" className="btn btn-primary">Create</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Done</button>
-                    <button type="button" className="btn btn-primary">Create</button>
-                </div>
             </div>
-            </div>
-        </div>
         </Layout>
-     );
+    );
 }
 
 export default ServiceCreate;
