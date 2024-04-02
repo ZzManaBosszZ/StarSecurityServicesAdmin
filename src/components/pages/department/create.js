@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import url from "../../services/url";
 import Swal from "sweetalert2";
+import Breadcrumb from "../../layouts/breadcrumb";
 function DepartmentCreate() {
 
     const [formDepartment, setFormDepartment] = useState({
@@ -36,7 +37,7 @@ function DepartmentCreate() {
                     });
                     setTimeout(() => {
                         navigate(`/department-list`); //chuyển đến trang department-list
-                    }, 3000);
+                    }, 1000);
                 } else {
                 }
             } catch (error) {
@@ -84,7 +85,9 @@ function DepartmentCreate() {
     };
 
     return (
+        
         <Layout>
+            <Breadcrumb title="Create" />
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title  fw-bold" id="depaddLabel"> Department Add</h5>

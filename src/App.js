@@ -17,7 +17,7 @@ import OfferDetail from "./components/pages/star-services-offer/detail";
 import OfferList from "./components/pages/star-services-offer";
 import Profile from "./components/pages/auth/profile";
 import EmpCreate from "./components/pages/employee/create";
-import ResetCode from "./components/pages/auth/reset-code";
+import ChangePasswordAdmin from "./components/pages/auth/change-password";
 import { useJwt } from "react-jwt";
 import { getAccessToken, removeAccessToken } from "./components/pages/utils/auth";
 import DepartmentEdit from "./components/pages/department/edit";
@@ -59,7 +59,7 @@ const ProtectedLoginRoute = ({ element }) => {
         <Route path="/login" element={<ProtectedLoginRoute element={<Login />} />} />
         <Route path="/profile" element={<ProtectedRoute element={<Profile />} />} />
         <Route path="/forgot-password" element={<ProtectedLoginRoute element={<ForgotPassword />} />}/>
-        <Route path="/reset-code" element={<ProtectedLoginRoute element={<ResetCode />} />}/>
+        <Route path="/change-password" element={<ProtectedRoute element={<ChangePasswordAdmin />} />}/>
         <Route path="/reset-password/:resetToken" element={<ProtectedLoginRoute element={<ResetPassword />} />} />
         {/* End Auth */}
         
