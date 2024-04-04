@@ -38,6 +38,7 @@ function ServiceList() {
         (currentPage + 1) * departmentPerPage
     );
 
+
     // delete department
 
     const handleDeleteService = async (departmentId) => {
@@ -138,7 +139,7 @@ function ServiceList() {
                                                                         <i className="icofont-paint"></i>
                                                                     </div>
                                                                     <span className="small text-muted project_name fw-bold"> Social Geek Made </span>
-                                                                    <Link to="/service-detail/{}"> <h6 className="mb-0 fw-bold  fs-6  mb-2">{item.serviceName}</h6></Link>
+                                                                    <Link to={`/service-detail/${item.id}`}> <h6 className="mb-0 fw-bold  fs-6  mb-2">{item.serviceName}</h6></Link>
                                                                 </div>
                                                                 <div className="btn-group" role="group" aria-label="Basic outlined example">
                                                                     <Link to={`/service-edit/${item.id}`} type="button" className="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editproject"><i className="icofont-edit text-success"></i></Link>

@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import url from "../../services/url";
 import Swal from "sweetalert2";
-
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 function ServiceCreate() {
 
     const [formService, setFormService] = useState({
@@ -82,6 +83,11 @@ function ServiceCreate() {
         setFormService({ ...formService, [name]: value });
 
         setNameExistsError("");
+    };
+
+    const handleEditorChange = (event, editor) => {
+        const data = editor.getData();
+        setFormService({ ...formService, serviceDescription: data });
     };
 
     return (
@@ -177,12 +183,26 @@ function ServiceCreate() {
                     </div> */}
                                 <div className="mb-3">
                                     <label for="serviceDescription" className="form-label">Description (optional)</label>
-                                    <textarea className="form-control"
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        id="serviceDescription"
+                                        name="serviceDescription"
+                                        data={formService.serviceDescription}
+                                        placeholder="Add any extra details about the request"
+                                        config={{
+                                            autoParagraph: false,
+                                            enterMode: 'div p br', 
+                                            ShiftEnterMode: 'br',
+                                            language: 'GB-en'
+                                        }}
+                                        onChange={handleEditorChange}
+                                    />
+                                    {/* <textarea className="form-control"
                                         rows="3"
                                         id="serviceDescription"
                                         name="serviceDescription"
                                         onChange={handleChange}
-                                        placeholder="Add any extra details about the request"></textarea>
+                                        placeholder="Add any extra details about the request"></textarea> */}
                                 </div>
                             </div>
                             <div className="modal-footer">

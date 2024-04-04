@@ -97,7 +97,7 @@ const ProtectedLoginRoute = ({ element }) => {
         {/* Start Services */}
         <Route path="/service-create" element={<ProtectedRoute element={<ServiceCreate />} />} />
         <Route path="/service-edit/:id" element={<ProtectedRoute element={<ServiceEdit />} />} />
-        <Route path="/service-detail/{}" element={<ProtectedRoute element={<ServiceDetail />} />} />
+        <Route path="/service-detail/:id" element={<ProtectedRoute element={<ServiceDetail />} />} />
         <Route path="/service-delete-at" element={<ProtectedRoute element={<ServiceDelete />} />} />
         <Route path="/service-list" element={<ProtectedRoute element={<ServiceList />} />} />
         {/* End Services */}
