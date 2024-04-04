@@ -19,8 +19,8 @@ function ServiceCreate() {
             enterMode: 'div p br', 
             ShiftEnterMode: 'br',
             language: 'GB-en',
-            width: '500',
-            height: '500'
+            width: '500px',
+            height: '500px'
     };
 
     // const [userRole, setUserRole] = useState(null);
@@ -190,8 +190,8 @@ function ServiceCreate() {
                             </select>
                         </div>
                     </div> */}
-                                <div className="mb-3">
-                                    <label for="serviceDescription" className="form-label">Description (optional)</label>
+                                <div className="mb-3" id="editor">
+                                    <label htmlFor="serviceDescription" className="form-label">Description (optional)</label>
                                     <CKEditor
                                         editor={ClassicEditor}
                                         id="serviceDescription"

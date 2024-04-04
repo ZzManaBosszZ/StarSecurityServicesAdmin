@@ -59,6 +59,13 @@ function Sidebar() {
                             <Link to="/service-list"><li><a className="ms-link"><span>List</span> </a></li></Link>
                         </ul>
                     </li>
+                    <li className={collapsedMenus.task ? "active" : "collapsed"}>
+                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" onClick={() => toggleSubMenu('task')}><i
+                            className="icofont-briefcase"></i> <span>Mission</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
+                        <ul className={collapsedMenus.task ? "sub-menu collapse show" : "sub-menu collapse"} id="menu-Componentsone">
+                            <Link to="/service-list"><li><a className="ms-link"><span>List</span> </a></li></Link>
+                        </ul>
+                    </li>
                     <li className="collapsed">
                         <a className="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components"><i
                             className="icofont-users-alt-5"></i> <span>Service Offer</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
