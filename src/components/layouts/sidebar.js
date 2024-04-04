@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from "react-router-dom";
 
 function Sidebar() {
-    
+
 
     const [collapsedMenus, setCollapsedMenus] = useState({});
 
@@ -59,19 +60,19 @@ function Sidebar() {
                             <Link to="/service-list"><li><a className="ms-link"><span>List</span> </a></li></Link>
                         </ul>
                     </li>
-                    <li className={collapsedMenus.task ? "active" : "collapsed"}>
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" onClick={() => toggleSubMenu('task')}><i
+                    <li className={collapsedMenus.mission ? "active" : "collapsed"}>
+                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" onClick={() => toggleSubMenu('mission')}><i
                             className="icofont-briefcase"></i> <span>Mission</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                        <ul className={collapsedMenus.task ? "sub-menu collapse show" : "sub-menu collapse"} id="menu-Componentsone">
-                            <Link to="/service-list"><li><a className="ms-link"><span>List</span> </a></li></Link>
+                        <ul className={collapsedMenus.mission ? "sub-menu collapse show" : "sub-menu collapse"} id="menu-Componentsone">
+                            <Link to="/mission-list"><li><a className="ms-link"><span>List</span> </a></li></Link>
                         </ul>
                     </li>
-                    <li className="collapsed">
-                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components"><i
+                    <li className={collapsedMenus.offer ? "active" : "collapsed"}>
+                        <a className="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components" onClick={() => toggleSubMenu('offer')}><i
                             className="icofont-users-alt-5"></i> <span>Service Offer</span> <span className="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
 
-                        <ul className="sub-menu collapse" id="payroll-Components">
-                            <li><a className="ms-link" href="salaryslip.html"><span>Offer Detail</span> </a></li>
+                        <ul className={collapsedMenus.offer ? "sub-menu collapse show" : "sub-menu collapse"} id="payroll-Components">
+                        <Link to="/service-offer-list"><li><a className="ms-link"><span>Offer List</span> </a></li></Link>
 
                         </ul>
                     </li>

@@ -23,6 +23,7 @@ import { getAccessToken, removeAccessToken } from "./components/pages/utils/auth
 import DepartmentEdit from "./components/pages/department/edit";
 import DepartmentCreate from "./components/pages/department/create";
 import DepartmentDelete from "./components/pages/department/delete";
+import MissionList from "./components/pages/mission";
 
 
 function App() {
@@ -110,6 +111,14 @@ const ProtectedLoginRoute = ({ element }) => {
         <Route path="/service-offer-detail" element={<ProtectedRoute element={<OfferDetail />} />} />
         <Route path="/service-offer-list" element={<ProtectedRoute element={<OfferList />} />} />
         {/* End Services Offer */}
+
+        {/* Start Mission */}
+        {/* <Route path="/mission-create" element={<ProtectedRoute element={<ServiceCreate />} />} />
+        <Route path="/service-edit/:id" element={<ProtectedRoute element={<ServiceEdit />} />} />
+        <Route path="/service-detail/:id" element={<ProtectedRoute element={<ServiceDetail />} />} />
+        <Route path="/service-delete-at" element={<ProtectedRoute element={<ServiceDelete />} />} /> */}
+        <Route path="/mission-list" element={<ProtectedRoute element={<MissionList />} />} />
+        {/* End Mission */}
 
       </Routes>
       </Router>
