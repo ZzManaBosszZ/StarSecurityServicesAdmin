@@ -14,6 +14,15 @@ function ServiceCreate() {
         serviceDescription: "",
     });
 
+    const editorConfiguration = {
+            autoParagraph: false,
+            enterMode: 'div p br', 
+            ShiftEnterMode: 'br',
+            language: 'GB-en',
+            width: '500',
+            height: '500'
+    };
+
     // const [userRole, setUserRole] = useState(null);
     // const [error, setError] = useState(null);
     const [errors, setErrors] = useState({});
@@ -189,12 +198,7 @@ function ServiceCreate() {
                                         name="serviceDescription"
                                         data={formService.serviceDescription}
                                         placeholder="Add any extra details about the request"
-                                        config={{
-                                            autoParagraph: false,
-                                            enterMode: 'div p br', 
-                                            ShiftEnterMode: 'br',
-                                            language: 'GB-en'
-                                        }}
+                                        config={editorConfiguration}
                                         onChange={handleEditorChange}
                                     />
                                     {/* <textarea className="form-control"
