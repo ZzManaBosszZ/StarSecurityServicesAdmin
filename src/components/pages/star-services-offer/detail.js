@@ -1,6 +1,47 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import api from "../../services/api";
+import url from "../../services/url";
 import Layout from "../../layouts";
 
 function OfferDetail() {
+
+    const { id } = useParams();
+    const [userRole, setUserRole] = useState(null);
+    const [error, setError] = useState(null);
+    const [servicesOfferDetail, setServicesOfferDetail] = useState([]);
+
+    useEffect(() => {
+        const userToken = localStorage.getItem("access_token");
+        // api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        api.get(`${url.SERVICE_OFFER.DETAIL.replace("{}", id)}`)
+            .then((response) => {
+                setServicesOfferDetail(response.data);
+            })
+            .catch((error) => {
+                // console.error("Error fetching promotion details:", error);
+            });
+    }, [id]);
+
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            const token = localStorage.getItem("access_token");
+            try {
+                const decodedToken = JSON.parse(atob(token.split(".")[1]));
+                const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                setUserRole(userRole);
+
+                if (userRole === "User" || userRole === "") {
+                    setError(true);
+                }
+            } catch (error) {
+                console.error("Error loading user role:", error);
+            }
+        };
+
+        fetchUserRole();
+    }, []);
+
     return (  
         <Layout>
             <div className="body d-flex py-lg-3 py-md-2">

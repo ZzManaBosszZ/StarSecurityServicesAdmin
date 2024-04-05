@@ -1,108 +1,151 @@
+import { Link } from "react-router-dom";
 import Layout from "../../layouts";
+import { useState, useEffect } from "react";
+import api from "../../services/api";
+import url from "../../services/url";
+import ReactPaginate from "react-paginate";
 
 function OfferList() {
-    return ( 
+
+    const [userRole, setUserRole] = useState(null);
+    const [error, setError] = useState(null);
+    const [servicesOffer, setServicesOffer] = useState([]);
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [selectClient, setSelectClient] = useState([]);
+
+    
+    useEffect(() => {
+        loadServicesOffer();
+    }, [currentPage]);
+
+    const loadServicesOffer = async () => {
+        const userToken = localStorage.getItem("access_token");
+        api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        try {
+            const response = await api.get(url.SERVICE_OFFER.LIST);
+            setServicesOffer(response.data);
+            setPageCount(Math.ceil(response.data.length / OfferPerPage));
+        } catch (error) { }
+    };
+
+    const OfferPerPage = 6;
+    const handlePageClick = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    const displayedServiceOffer = servicesOffer.slice(
+        currentPage * OfferPerPage,
+        (currentPage + 1) * OfferPerPage
+    );
+
+    useEffect(() => {
+        const fetchClient = async () => {
+            const userToken = localStorage.getItem("access_token");
+            api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+            try {
+                const response = await api.get(url.CLIENT.LIST);
+                const clientData = response.data.map((client) => ({
+                    value: client.id,
+                    label: client.clientName,
+                }));
+                setSelectClient(clientData);
+            } catch (error) { }
+        };
+        fetchClient();
+    }, []);
+
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            const token = localStorage.getItem("access_token");
+            try {
+                const decodedToken = JSON.parse(atob(token.split(".")[1]));
+                const userRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                setUserRole(userRole);
+
+                if (userRole === "User" || userRole === "Star Admin Staff") {
+                    setError(true);
+                }
+            } catch (error) {
+                console.error("Error loading user role:", error);
+            }
+        };
+
+        fetchUserRole();
+    }, []);
+
+    return (
         <Layout>
             <div className="body d-flex py-lg-3 py-md-2">
-            <div className="container-xxl">
-                <div className="row align-items-center">
-                    <div className="border-0 mb-4">
-                        <div className="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                            <h3 className="fw-bold mb-0">Service Offer List</h3>
+                <div className="container-xxl">
+                    <div className="row align-items-center">
+                        <div className="border-0 mb-4">
+                            <div className="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
+                                <h3 className="fw-bold mb-0">Service Offer List</h3>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="row g-3">
-                    <div className="col-md-12">
-                        <div className="card mb-3">
-                            <div className="card-body">
-                                <table id="myProjectTable" className="table table-hover align-middle mb-0" style={{width: "100%"}}>
-                                    <thead>
-                                        <tr>
-                                            <th>NO</th>
-                                            <th>Project</th>
-                                            <th>Client Name</th>
-                                            <th>Date Start</th>
-                                            <th>Date End</th>
-                                            <th>Amount</th>
-                                            <th>status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><a href="invoices.html" className="fw-bold text-secondary">#00001</a></td>
-                                            <td><a href="projects.html">Social Geek Made</a></td>
-                                            <td>AgilSoft Tech</td>
-                                            <td>10-01-2021</td>
-                                            <td>10-02-2021</td>
-                                            <td>$3250</td>
-                                            <td><span className="badge bg-warning">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="invoices.html" className="fw-bold text-secondary">#00002</a></td>
-                                            <td><a href="projects.html">Practice to Perfect</a></td>
-                                            <td>Macrosoft</td>
-                                            <td>12-02-2021</td>
-                                            <td>10-04-2021</td>
-                                            <td>$1578</td>
-                                            <td><span className="badge bg-success">Paid</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="invoices.html" className="fw-bold text-secondary">#00003</a></td>
-                                            <td><a href="projects.html">Rhinestone</a></td>
-                                            <td>Google</td>
-                                            <td>18-02-2021</td>
-                                            <td>20-04-2021</td>
-                                            <td>$1978</td>
-                                            <td><span className="badge bg-lavender-purple">Draf</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="invoices.html" className="fw-bold text-secondary">#00004</a></td>
-                                            <td><a href="projects.html">Box of Crayons</a></td>
-                                            <td>Pixelwibes</td>
-                                            <td>28-02-2021</td>
-                                            <td>30-04-2021</td>
-                                            <td>$1978</td>
-                                            <td><span className="badge bg-lavender-purple">Draf</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="invoices.html" className="fw-bold text-secondary">#00005</a></td>
-                                            <td><a href="projects.html">Practice to Perfect</a></td>
-                                            <td>Deltasoft Tech</td>
-                                            <td>11-02-2021</td>
-                                            <td>10-04-2021</td>
-                                            <td>$1578</td>
-                                            <td><span className="badge bg-success">Paid</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="invoices.html" className="fw-bold text-secondary">#00006</a></td>
-                                            <td><a href="projects.html">Rhinestone</a></td>
-                                            <td>Google</td>
-                                            <td>17-02-2021</td>
-                                            <td>20-04-2021</td>
-                                            <td>$1978</td>
-                                            <td><span className="badge bg-lavender-purple">Draf</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="invoices.html" className="fw-bold text-secondary">#00007</a></td>
-                                            <td><a href="projects.html">Box of Crayons</a></td>
-                                            <td>Pixelwibes</td>
-                                            <td>14-02-2021</td>
-                                            <td>30-04-2021</td>
-                                            <td>$1978</td>
-                                            <td><span className="badge bg-lavender-purple">Draf</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    <div className="row g-3">
+                        <div className="col-md-12">
+                            <div className="card mb-3">
+                                <div className="card-body">
+                                    <table id="myProjectTable" className="table table-hover align-middle mb-0" style={{ width: "100%" }}>
+                                        <thead>
+                                            <tr>
+                                                <th>NO</th>
+                                                <th>Service Name Hire</th>
+                                                <th>Client Name</th>
+                                                <th>Date</th>
+                                                <th>Price</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {displayedServiceOffer.map((item, index) => {
+                                                const clientName = selectClient.find(client => client.value === item.clientId)?.label || 'Không tìm thấy tên';
+                                                return (
+                                                    <tr key={index}>
+                                                        <td> <Link><a className="fw-bold text-secondary">{item.serviceOfferedId}</a></Link> </td>
+                                                        <td> <Link to={`/service-offer-detail/${item.serviceOfferedId}`}>{item.serviceName}</Link></td>
+                                                        <td>{item.clientName}</td>
+                                                        <td>{item.createdAt}</td>
+                                                        <td>$3250</td>
+                                                        <td><span className="badge bg-warning">Pending</span></td>
+
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                       
+                                    </table>
+                                </div>
+                                <ReactPaginate
+                                            previousLabel="Previous"
+                                            nextLabel="Next"
+                                            pageClassName="page-item"
+                                            pageLinkClassName="page-link"
+                                            previousClassName="page-item"
+                                            previousLinkClassName="page-link"
+                                            nextClassName="page-item"
+                                            nextLinkClassName="page-link"
+                                            breakLabel="..."
+                                            breakClassName="page-item"
+                                            breakLinkClassName="page-link"
+                                            pageCount={pageCount}
+                                            marginPagesDisplayed={2}
+                                            pageRangeDisplayed={5}
+                                            onPageChange={handlePageClick}
+                                            containerClassName="pagination"
+                                            activeClassName="active"
+                                        />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </Layout>
-     );
+    );
 }
 
 export default OfferList;

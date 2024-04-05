@@ -108,7 +108,7 @@ const ProtectedLoginRoute = ({ element }) => {
         {/* <Route path="/service-offer-detail" element={<OfferDetail />}/>
         <Route path="/service-offer-list" element={<OfferList />}/> */}
 
-        <Route path="/service-offer-detail" element={<ProtectedRoute element={<OfferDetail />} />} />
+        <Route path="/service-offer-detail/:id" element={<ProtectedRoute element={<OfferDetail />} />} />
         <Route path="/service-offer-list" element={<ProtectedRoute element={<OfferList />} />} />
         {/* End Services Offer */}
 

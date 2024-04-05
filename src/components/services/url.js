@@ -37,7 +37,7 @@ const url = {
     SERVICE_OFFER: {
         LIST: "/ServiceOffereds/Get-all",
         UPDATE: "/ServiceOffereds/Edit",
-        DETAIL: "/ServiceOffereds/Detail",
+        DETAIL: "/ServiceOffereds/{}",
     },
 
     DEPARTMENT:{
