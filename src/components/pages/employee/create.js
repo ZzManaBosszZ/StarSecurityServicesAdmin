@@ -2,8 +2,8 @@ import Layout from "../../layouts";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import url from "../../services/url";
-import { toast } from "react-toastify";
 import Select from "react-select";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 function EmpCreate() {
@@ -18,6 +18,8 @@ function EmpCreate() {
         grade: "",
         client: "",
         achievements: "",
+        imageURL: null,
+        employee_image_preview: null,
         departmentIDs: [],
     });
 
@@ -56,26 +58,32 @@ function EmpCreate() {
             try {
                 const response = await api.post(url.EMPLOYEE.CREATE, formEmployee);
                 if (response && response.data) {
-                    toast.success("Create Employee Successffuly.", {
-                        position: "top-right",
-                        autoClose: 3000,
+                    Swal.fire({
+                        title: " Success create Employee",
+                        showConfirmButton: true,
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
                     });
                     setTimeout(() => {
                         navigate(`/employee-list`); //chuyển đến trang employee-list
-                    }, 3000);
+                    }, 1000);
                 } else {
                 }
             } catch (error) {
                 if (error.response.status === 400 && error.response.data.message === "Employee already exists") {
                     setNameExistsError("The Employee name already exists");
-                    toast.error("The Employee name already exists", {
-                        position: "top-right",
-                        autoClose: 3000,
+                    Swal.fire({
+                        title: " Unable to create Employee",
+                        showConfirmButton: true,
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
                     });
                 } else {
-                    toast.error("Unable to create Employee, please try again", {
-                        position: "top-right",
-                        autoClose: 3000,
+                    Swal.fire({
+                        title: " Unable to create Employee",
+                        showConfirmButton: true,
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
                     });
                 }
                 // console.error("Error creating test:", error);
@@ -83,6 +91,17 @@ function EmpCreate() {
             }
         }
     };
+
+    // const handleFileEmployeeChange = (e, fieldName) => {
+    //     const { files } = e.target;
+    //     const selectedImage = files.length > 0 ? URL.createObjectURL(files[0]) : null;
+
+    //     setFormEmployee({
+    //         ...formEmployee,
+    //         [fieldName]: fieldName === "imageUrl" ? (files.length > 0 ? files[0] : null) : null,
+    //         employee_image_preview: selectedImage,
+    //     });
+    // };
 
     const validateForm = () => {
         let valid = true;
@@ -107,10 +126,10 @@ function EmpCreate() {
             newErrors.address = "Please enter address";
             valid = false;
         }
-        // if (formEmployee.employee_image === null) {
-        //     newErrors.employee_image = "Please choose movie photo";
-        //     valid = false;
-        // }
+        if (formEmployee.imageURL === null) {
+            newErrors.imageURL = "Please choose employee photo";
+            valid = false;
+        }
         if (formEmployee.employeeContactNumber === "") {
             newErrors.employeeContactNumber = "Please enter digit numbers";
             valid = false;
@@ -153,8 +172,11 @@ function EmpCreate() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        // if (name === "imageUrl") {
+        //     handleFileEmployeeChange(e, name);
+        // }else{
         setFormEmployee({ ...formEmployee, [name]: value });
-
+        // }
         setNameExistsError("");
     };
 
@@ -174,8 +196,20 @@ function EmpCreate() {
                             value={formEmployee.id}
                             onChange={handleChange}
                             placeholder="EMP 01 " />
-                         {errors.id && <div className="text-danger">{errors.id}</div>}
+                        {errors.id && <div className="text-danger">{errors.id}</div>}
                     </div>
+                    {/* <div class="mb-3">
+                        <label for="imageUrl" class="form-label">Employee Image Profile</label>
+                        <input class="form-control"
+                            type="file"
+                            name="imageUrl"
+                            id="imageUrl" 
+                            // value={formEmployee.imageURL}
+                            onChange={handleChange}
+                            accept=".jpg, .png, .etc"
+                        />
+                        {errors.imageUrl && <div className="text-danger">{errors.imageUrl}</div>}
+                    </div> */}
                     <div class="mb-3">
                         <label htmlFor="employeeName" class="form-label">Employee Name</label>
                         <input type="text"
@@ -237,7 +271,8 @@ function EmpCreate() {
                     </div>
                     <div class="mb-3">
                         <label htmlFor="role" class="form-label">Employee role</label>
-                        <input class="form-control"
+                        <input
+                            class="form-control"
                             type="text" id="role"
                             name="role"
                             value={formEmployee.role}
@@ -245,25 +280,22 @@ function EmpCreate() {
                             placeholder="Security Analyst" />
                         {errors.role && <div className="text-danger">{errors.role}</div>}
                     </div>
-                    <div class="mb-3">
-                        <label htmlFor="grade" class="form-label">Employee grade</label>
-                        <input class="form-control"
-                            type="text" id="grade"
-                            value={formEmployee.grade}
-                            name="grade"
-                            onChange={handleChange}
-                            placeholder="Improved security protocolst" />
-                        {errors.grade && <div className="text-danger">{errors.grade}</div>}
-                    </div>
                     {/* <div class="mb-3">
-                        <label htmlFor="client" class="form-label">Client</label>
-                        <input class="form-control"
-                            type="text" id="client"
-                            name="client"
-                            value={formEmployee.client}
+                        <label htmlFor="grade" class="form-label">Employee grade</label>
+                        <select
+                            class="form-control"
+                            id="grade"
+                            name="grade"
+                            value={formEmployee.grade}
                             onChange={handleChange}
-                            placeholder="Improved security protocolst" />
-                        {errors.client && <div className="text-danger">{errors.client}</div>}
+                        >
+                            <option value="">Select Grade</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                        {errors.grade && <div className="text-danger">{errors.grade}</div>}
                     </div> */}
                     <div class="mb-3">
                         <label htmlFor="achievements" class="form-label">Employee achievements</label>
