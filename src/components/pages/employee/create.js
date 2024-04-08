@@ -280,7 +280,7 @@ function EmpCreate() {
                             placeholder="Security Analyst" />
                         {errors.role && <div className="text-danger">{errors.role}</div>}
                     </div>
-                    {/* <div class="mb-3">
+                    <div class="mb-3">
                         <label htmlFor="grade" class="form-label">Employee grade</label>
                         <select
                             class="form-control"
@@ -296,7 +296,7 @@ function EmpCreate() {
                             <option value="D">D</option>
                         </select>
                         {errors.grade && <div className="text-danger">{errors.grade}</div>}
-                    </div> */}
+                    </div>
                     <div class="mb-3">
                         <label htmlFor="achievements" class="form-label">Employee achievements</label>
                         <input class="form-control"
