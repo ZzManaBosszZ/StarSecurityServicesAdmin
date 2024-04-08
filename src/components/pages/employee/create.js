@@ -92,17 +92,6 @@ function EmpCreate() {
         }
     };
 
-    // const handleFileEmployeeChange = (e, fieldName) => {
-    //     const { files } = e.target;
-    //     const selectedImage = files.length > 0 ? URL.createObjectURL(files[0]) : null;
-
-    //     setFormEmployee({
-    //         ...formEmployee,
-    //         [fieldName]: fieldName === "imageUrl" ? (files.length > 0 ? files[0] : null) : null,
-    //         employee_image_preview: selectedImage,
-    //     });
-    // };
-
     const validateForm = () => {
         let valid = true;
         const newErrors = {};
