@@ -10,9 +10,10 @@ function OfferList() {
     const [userRole, setUserRole] = useState(null);
     const [error, setError] = useState(null);
     const [servicesOffer, setServicesOffer] = useState([]);
+    const [selectClient, setSelectClient] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-    const [selectClient, setSelectClient] = useState([]);
+    
 
     
     useEffect(() => {
@@ -29,16 +30,6 @@ function OfferList() {
         } catch (error) { }
     };
 
-    const OfferPerPage = 6;
-    const handlePageClick = ({ selected }) => {
-        setCurrentPage(selected);
-    };
-
-    const displayedServiceOffer = servicesOffer.slice(
-        currentPage * OfferPerPage,
-        (currentPage + 1) * OfferPerPage
-    );
-
     useEffect(() => {
         const fetchClient = async () => {
             const userToken = localStorage.getItem("access_token");
@@ -54,6 +45,17 @@ function OfferList() {
         };
         fetchClient();
     }, []);
+
+    const OfferPerPage = 6;
+    const handlePageClick = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    const displayedServiceOffer = servicesOffer.slice(
+        currentPage * OfferPerPage,
+        (currentPage + 1) * OfferPerPage
+    );
+
 
     useEffect(() => {
         const fetchUserRole = async () => {
@@ -103,10 +105,9 @@ function OfferList() {
                                         </thead>
                                         <tbody>
                                             {displayedServiceOffer.map((item, index) => {
-                                                const clientName = selectClient.find(client => client.value === item.clientId)?.label || 'Không tìm thấy tên';
                                                 return (
                                                     <tr key={index}>
-                                                        <td> <Link><a className="fw-bold text-secondary">{item.serviceOfferedId}</a></Link> </td>
+                                                        <td> <Link className="fw-bold text-secondary">{item.serviceOfferedId}</Link> </td>
                                                         <td> <Link to={`/service-offer-detail/${item.serviceOfferedId}`}>{item.serviceName}</Link></td>
                                                         <td>{item.clientName}</td>
                                                         <td>{item.createdAt}</td>

@@ -9,6 +9,7 @@ function OfferDetail() {
     const { id } = useParams();
     const [userRole, setUserRole] = useState(null);
     const [error, setError] = useState(null);
+    const [selectClient, setSelectClient] = useState([]);
     const [servicesOfferDetail, setServicesOfferDetail] = useState([]);
 
     useEffect(() => {
@@ -22,6 +23,22 @@ function OfferDetail() {
                 // console.error("Error fetching promotion details:", error);
             });
     }, [id]);
+
+    useEffect(() => {
+        const fetchClient = async () => {
+            const userToken = localStorage.getItem("access_token");
+            api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+            try {
+                const response = await api.get(url.CLIENT.LIST);
+                const clientData = response.data.map((client) => ({
+                    value: client.id,
+                    label: client.clientName,
+                }));
+                setSelectClient(clientData);
+            } catch (error) { }
+        };
+        fetchClient();
+    }, []);
 
     useEffect(() => {
         const fetchUserRole = async () => {
@@ -67,24 +84,24 @@ function OfferDetail() {
                                 <div className="row mb-4">
                                     <div className="col-sm-6">
                                         <h6 className="mb-3">From:</h6>
-                                        <div><strong>PixelWibes</strong></div>
+                                        <div><strong>{selectClient.name}</strong></div>
                                         <div>111  Berkeley Rd</div>
                                         <div>STREET ON THE FOSSE, Poland</div>
-                                        <div>Email: info@deoweb.com</div>
-                                        <div>Phone: +44 888 666 3333</div>
+                                        <div>Email: {selectClient.email}</div>
+                                        <div>Phone: {selectClient.contactNumber}</div>
                                     </div>
                                     
                                     <div className="col-sm-6">
                                         <h6 className="mb-3">To:</h6>
-                                        <div><strong> Dylan Hunter</strong></div>
-                                        <div>Web Designer</div>
-                                        <div>Employee ID: 00008</div>
-                                        <div>Joining Date: 10 Feb 2017</div>
+                                        <div><strong>5 Dump</strong></div>
+                                        <div>Star Security Service</div>
+                                        <div>Address: </div>
+
                                         <div>Phone: +66 243 456 789</div>
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-lg-6">
+                                    <div className="col-lg">
                                         <div className="table-responsive-sm">
                                             <table className="table table-striped">
                                                 <thead>
@@ -128,7 +145,7 @@ function OfferDetail() {
                                                 <table className="table table-clear">
                                                     <tbody>
                                                         <tr>
-                                                            <td ><strong>Subtotal</strong></td>
+                                                            <td ><strong>Total</strong></td>
                                                             <td className="text-end">$8150,00</td>
                                                         </tr>
                                                     </tbody>
@@ -136,66 +153,7 @@ function OfferDetail() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-6">
-                                        <div className="table-responsive-sm">
-                                            <table className="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th className="text-center">#</th>
-                                                        <th>Deductions</th>
-                                                        <th className="text-end">Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="text-center">1</td>
-                                                        <td>Tax Deducted at Source (T.D.S.)</td>
-                                                        <td className="text-end">$15,00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="text-center">2</td>
-                                                        <td>Provident Fund</td>
-                                                        <td className="text-end">$200,00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="text-center">3</td>
-                                                        <td>ESI</td>
-                                                        <td className="text-end">$0,00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="text-center">4</td>
-                                                        <td>Other Deductions</td>
-                                                        <td className="text-end">$0,00</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-        
-                                        <div className="row">
-                                            <div className="col-lg-4 col-sm-5">
-                                            
-                                            </div>
-                                            
-                                            <div className="col-lg-4 col-sm-5 ms-auto">
-                                                <table className="table table-clear">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td ><strong>Subtotal</strong></td>
-                                                            <td className="text-end">$215,00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td ><strong>(ER) - (DE)</strong></td>
-                                                            <td className="text-end">$7935</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td ><strong>Total</strong></td>
-                                                            <td className="text-end"><strong>$7935</strong></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 
 
