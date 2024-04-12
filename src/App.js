@@ -24,6 +24,7 @@ import DepartmentEdit from "./components/pages/department/edit";
 import DepartmentCreate from "./components/pages/department/create";
 import DepartmentDelete from "./components/pages/department/delete";
 import MissionList from "./components/pages/mission";
+import MissionCreate from "./components/pages/mission/create";
 
 
 function App() {
@@ -113,10 +114,10 @@ const ProtectedLoginRoute = ({ element }) => {
         {/* End Services Offer */}
 
         {/* Start Mission */}
-        {/* <Route path="/mission-create" element={<ProtectedRoute element={<ServiceCreate />} />} />
+        <Route path="/mission-create" element={<ProtectedRoute element={<MissionCreate />} />} />
         <Route path="/service-edit/:id" element={<ProtectedRoute element={<ServiceEdit />} />} />
         <Route path="/service-detail/:id" element={<ProtectedRoute element={<ServiceDetail />} />} />
-        <Route path="/service-delete-at" element={<ProtectedRoute element={<ServiceDelete />} />} /> */}
+        <Route path="/service-delete-at" element={<ProtectedRoute element={<ServiceDelete />} />} />
         <Route path="/mission-list" element={<ProtectedRoute element={<MissionList />} />} />
         {/* End Mission */}
 

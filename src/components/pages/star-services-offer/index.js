@@ -13,9 +13,9 @@ function OfferList() {
     const [selectClient, setSelectClient] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-    
 
-    
+
+
     useEffect(() => {
         loadServicesOffer();
     }, [currentPage]);
@@ -76,6 +76,33 @@ function OfferList() {
         fetchUserRole();
     }, []);
 
+    const getStatusColor = (status) => {
+        switch (status) {
+            case "Pending":
+                return "bg-warning";
+            case "Approved":
+                return "bg-success";
+            case "Cancel":
+                return "bg-danger";
+            default:
+                return "bg-secondary";
+        }
+    };
+
+    const getStatusText = (status) => {
+        switch (status) {
+            case "Pending":
+                return "Pending";
+            case "Approved":
+                return "Approved";
+            case "Cancel":
+                return "Cancel";
+            default:
+                return "Unknown";
+        }
+    };
+
+
     return (
         <Layout>
             <div className="body d-flex py-lg-3 py-md-2">
@@ -96,7 +123,7 @@ function OfferList() {
                                         <thead>
                                             <tr>
                                                 <th>NO</th>
-                                                <th>Service Name Hire</th>
+                                                <th>Client Name Hire</th>
                                                 <th>Client Name</th>
                                                 <th>Date</th>
                                                 <th>Price</th>
@@ -109,37 +136,39 @@ function OfferList() {
                                                     <tr key={index}>
                                                         <td> <Link className="fw-bold text-secondary">{item.serviceOfferedId}</Link> </td>
                                                         <td> <Link to={`/service-offer-detail/${item.serviceOfferedId}`}>{item.serviceName}</Link></td>
-                                                        <td>{item.clientName}</td>
+                                                        <td>{item.client?.clientName}</td>
                                                         <td>{item.createdAt}</td>
                                                         <td>$3250</td>
-                                                        <td><span className="badge bg-warning">Pending</span></td>
+                                                        <td><span className={`badge ${getStatusColor(item.status)}`}>
+                                                            {getStatusText(item.status)}
+                                                        </span></td>
 
                                                     </tr>
                                                 )
                                             })}
                                         </tbody>
-                                       
+
                                     </table>
                                 </div>
                                 <ReactPaginate
-                                            previousLabel="Previous"
-                                            nextLabel="Next"
-                                            pageClassName="page-item"
-                                            pageLinkClassName="page-link"
-                                            previousClassName="page-item"
-                                            previousLinkClassName="page-link"
-                                            nextClassName="page-item"
-                                            nextLinkClassName="page-link"
-                                            breakLabel="..."
-                                            breakClassName="page-item"
-                                            breakLinkClassName="page-link"
-                                            pageCount={pageCount}
-                                            marginPagesDisplayed={2}
-                                            pageRangeDisplayed={5}
-                                            onPageChange={handlePageClick}
-                                            containerClassName="pagination"
-                                            activeClassName="active"
-                                        />
+                                    previousLabel="Previous"
+                                    nextLabel="Next"
+                                    pageClassName="page-item"
+                                    pageLinkClassName="page-link"
+                                    previousClassName="page-item"
+                                    previousLinkClassName="page-link"
+                                    nextClassName="page-item"
+                                    nextLinkClassName="page-link"
+                                    breakLabel="..."
+                                    breakClassName="page-item"
+                                    breakLinkClassName="page-link"
+                                    pageCount={pageCount}
+                                    marginPagesDisplayed={2}
+                                    pageRangeDisplayed={5}
+                                    onPageChange={handlePageClick}
+                                    containerClassName="pagination"
+                                    activeClassName="active"
+                                />
                             </div>
                         </div>
                     </div>

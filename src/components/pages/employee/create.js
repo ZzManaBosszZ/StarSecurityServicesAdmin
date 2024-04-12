@@ -16,11 +16,11 @@ function EmpCreate() {
         educationalQualification: "",
         role: "",
         grade: "",
-        client: "",
+        // client: "",
         achievements: "",
-        imageURL: null,
-        employee_image_preview: null,
-        departmentIDs: [],
+        image: null,
+        // employee_picture_preview: null,
+        departmentID: [],
     });
 
     // const [userRole, setUserRole] = useState(null);
@@ -56,7 +56,9 @@ function EmpCreate() {
             const userToken = localStorage.getItem("access_token");
             api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
             try {
-                const response = await api.post(url.EMPLOYEE.CREATE, formEmployee);
+                const response = await api.post(url.EMPLOYEE.CREATE, formEmployee, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                });
                 if (response && response.data) {
                     Swal.fire({
                         title: " Success create Employee",
@@ -91,6 +93,16 @@ function EmpCreate() {
             }
         }
     };
+    const handleFileEmployeeChange = (e, fieldName) => {
+        const { files } = e.target;
+        const selectedImage = files.length > 0 ? URL.createObjectURL(files[0]) : null;
+
+        setFormEmployee({
+            ...formEmployee,
+            [fieldName]: fieldName === "image" ? (files.length > 0 ? files[0] : null) : null,
+            employee_image_preview: selectedImage,
+        });
+    };
 
     const validateForm = () => {
         let valid = true;
@@ -115,8 +127,8 @@ function EmpCreate() {
             newErrors.address = "Please enter address";
             valid = false;
         }
-        if (formEmployee.imageURL === null) {
-            newErrors.imageURL = "Please choose employee photo";
+        if (formEmployee.image === null) {
+            newErrors.image = "Please choose employee photo";
             valid = false;
         }
         if (formEmployee.employeeContactNumber === "") {
@@ -139,8 +151,8 @@ function EmpCreate() {
             newErrors.role = "Please choose role";
             valid = false;
         }
-        if (formEmployee.departmentIDs === "") {
-            newErrors.departmentIDs = "Please choose department";
+        if (formEmployee.departmentID === "") {
+            newErrors.departmentID = "Please choose department";
             valid = false;
         }
         if (formEmployee.grade === "") {
@@ -161,11 +173,11 @@ function EmpCreate() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // if (name === "imageUrl") {
-        //     handleFileEmployeeChange(e, name);
-        // }else{
+        if (name === "image") {
+            handleFileEmployeeChange(e, name);
+        }else{
         setFormEmployee({ ...formEmployee, [name]: value });
-        // }
+        }
         setNameExistsError("");
     };
 
@@ -187,18 +199,18 @@ function EmpCreate() {
                             placeholder="EMP 01 " />
                         {errors.id && <div className="text-danger">{errors.id}</div>}
                     </div>
-                    {/* <div class="mb-3">
-                        <label for="imageUrl" class="form-label">Employee Image Profile</label>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Employee Image Profile</label>
                         <input class="form-control"
                             type="file"
-                            name="imageUrl"
-                            id="imageUrl" 
-                            // value={formEmployee.imageURL}
+                            name="image"
+                            id="image" 
+                            // value={formEmployee.image}
                             onChange={handleChange}
                             accept=".jpg, .png, .etc"
                         />
-                        {errors.imageUrl && <div className="text-danger">{errors.imageUrl}</div>}
-                    </div> */}
+                        {errors.image && <div className="text-danger">{errors.image}</div>}
+                    </div>
                     <div class="mb-3">
                         <label htmlFor="employeeName" class="form-label">Employee Name</label>
                         <input type="text"
@@ -234,19 +246,19 @@ function EmpCreate() {
                         {errors.address && <div className="text-danger">{errors.address}</div>}
                     </div>
                     <div class="mb-3">
-                        <label htmlFor="departmentIDs" className="form-label">Department</label>
+                        <label htmlFor="departmentID" className="form-label">Department</label>
                         <Select
-                            name="departmentIDs"
-                            value={setDepartment.filter((option) => formEmployee.departmentIDs.includes(option.value))}
+                            name="departmentID"
+                            value={setDepartment.filter((option) => formEmployee.departmentID.includes(option.value))}
                             isMulti
                             closeMenuOnSelect={false}
                             onChange={(selectedOption) => {
-                                setFormEmployee({ ...formEmployee, departmentIDs: selectedOption.map((option) => option.value) });
+                                setFormEmployee({ ...formEmployee, departmentID: selectedOption.map((option) => option.value) });
                             }}
                             options={setDepartment}
                             placeholder="Select Departments"
                         />
-                        {errors.departmentIDs && <div className="text-danger">{errors.departmentIDs}</div>}
+                        {errors.departmentID && <div className="text-danger">{errors.departmentID}</div>}
                     </div>
                     <div class="mb-3">
                         <label htmlFor="educational_qualification" class="form-label">Educational qualification</label>

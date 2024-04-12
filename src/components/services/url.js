@@ -1,5 +1,6 @@
 const url = {
     BASE_URL: "https://localhost:7011/api",
+    
     DASHBOARD: {
         
     },
@@ -17,7 +18,8 @@ const url = {
         FORGOT_PASSWORD: "/Accounts/ForgotPassword",
         CHANGE_PASSWORD: "/Accounts/ChangePassword",
         RESET_PASSWORD: "/Accounts/ResetPassword",
-        PROFILE: ""
+        PROFILE: "/Accounts/Profile",
+        UPDATE_PROFILE:"/Accounts/UpdateProfile",
     },
 
     CLIENT:{
@@ -38,6 +40,7 @@ const url = {
         LIST: "/ServiceOffereds/Get-all",
         UPDATE: "/ServiceOffereds/Edit",
         DETAIL: "/ServiceOffereds/{}",
+        UPDATE_STATUS:"/ServiceOffereds/UpdateStatus/{}"
     },
 
     DEPARTMENT:{

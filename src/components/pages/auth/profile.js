@@ -50,7 +50,6 @@ function Profile() {
                     Authorization: `Bearer ${userToken}`,
                 },
             };
-
             const profileResponse = await api.get(url.AUTH.PROFILE, config);
             setInfo(profileResponse.data);
         } catch (error) { }

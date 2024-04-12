@@ -86,7 +86,7 @@ function EmpList() {
                                         <div className="card teacher-card">
                                             <div className="card-body d-flex">
                                                 <div className="profile-av pe-xl-4 pe-md-2 pe-sm-4 pe-4 text-center w220">
-                                                    <img src="assets/images/lg/avatar3.jpg" alt="" className="avatar xl rounded-circle img-thumbnail shadow-sm" />
+                                                    <img src={item.picture} alt="" className="avatar xl rounded-circle img-thumbnail shadow-sm" />
                                                     <div className="about-info d-flex align-items-center mt-3 justify-content-center">
                                                         <div className="followers me-2">
                                                             <i className="icofont-tasks color-careys-pink fs-4"></i>
