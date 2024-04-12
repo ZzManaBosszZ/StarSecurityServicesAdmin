@@ -5,7 +5,14 @@ import ReactPaginate from "react-paginate";
 function MissionList() {
     return (
         <Layout>
-            <div class="row">
+            
+        </Layout>
+    );
+}
+
+export default MissionList;
+
+{/* <div class="row">
                 <div class="col-sm-12">
                     <div class="card mb">
                         <div class="card-header">
@@ -22,54 +29,49 @@ function MissionList() {
                                             <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#Approval-list" role="tab">Approval</a></li>
                                             <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#Completed-list" role="tab">Completed</a></li>
                                         </ul> */}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
+            //                         </div>
+            //                     </div>
+            //                 </div>
+            //             </div>
+            //             <div class="card-body">
 
-                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dataTables_length" id="DataTables_Table_0_length">
+            //                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+            //                     <div class="row">
+            //                         <div class="col-sm-12 col-md-6">
+            //                             <div class="dataTables_length" id="DataTables_Table_0_length">
 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                    </div></div><div class="row">
-                                    <div class="col-sm-12">
-                                        <table class="datatable table table-stripped mb-0 dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: " 50px" }}>ID</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: " 200px" }}>Client Name</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: " 150px" }}>Mail</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: "200px" }}>Service Offer</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: "125.5px" }}>Department</th>
-                                                    <th class="sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: "125.5px" }} aria-sort="descending">Status</th></tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="odd">
-                                                    <td>1</td>
-                                                    <td class="">Angelica Ramos</td>
-                                                    <td class="">Chief Executive Officer (CEO)</td>
-                                                    <td>London</td>
-                                                    <td>47</td>
-                                                    <td class="sorting_1">$1,200,000</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+            //                             </div>
+            //                         </div>
+            //                         <div class="col-sm-12 col-md-6">
+            //                         </div></div><div class="row">
+            //                         <div class="col-sm-12">
+            //                             <table class="datatable table table-stripped mb-0 dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+            //                                 <thead>
+            //                                     <tr role="row">
+            //                                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: " 50px" }}>ID</th>
+            //                                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: " 200px" }}>Client Name</th>
+            //                                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: " 150px" }}>Mail</th>
+            //                                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: "200px" }}>Service Offer</th>
+            //                                         <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: "125.5px" }}>Department</th>
+            //                                         <th class="sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style={{ width: "125.5px" }} aria-sort="descending">Status</th></tr>
+            //                                 </thead>
+            //                                 <tbody>
+            //                                     <tr class="odd">
+            //                                         <td>1</td>
+            //                                         <td class="">Angelica Ramos</td>
+            //                                         <td class="">Chief Executive Officer (CEO)</td>
+            //                                         <td>London</td>
+            //                                         <td>47</td>
+            //                                         <td class="sorting_1">$1,200,000</td>
+            //                                     </tr>
+            //                                 </tbody>
+            //                             </table>
+            //                         </div>
+            //                     </div>
 
-                            </div>
+            //                 </div>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </Layout>
-    );
-}
-
-export default MissionList;
+            //             </div>
+            //         </div>
+            //     </div>
+            // </div> */}
