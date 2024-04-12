@@ -3,6 +3,7 @@ import Layout from "../../layouts";
 import ReactPaginate from "react-paginate";
 
 function MissionList() {
+    
     return (
         <Layout>
             
